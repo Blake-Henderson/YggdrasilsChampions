@@ -26,6 +26,18 @@ public class Board : MonoBehaviour
         }
     }
 
+    public void StepOnTile(Vector3Int pos)
+    {
+        TileBase tile = map.GetTile(pos);
+        baseTypeDict[tile].OnStep();
+    }
+
+    public void EndOnTile(Vector3Int pos)
+    {
+        TileBase tile = map.GetTile(pos);
+        baseTypeDict[tile].OnEnd();
+    }
+
     static Vector3Int[] directions = { new Vector3Int(0, 1), new Vector3Int(1, 0), new Vector3Int(0, -1), new Vector3Int(-1, 0) };
 
     public Vector3Int[] GetNeighbors(Vector3Int pos)
