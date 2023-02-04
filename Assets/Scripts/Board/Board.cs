@@ -5,8 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class Board : MonoBehaviour
 {
-    [SerializeField]
-    private Tilemap map;
+    public Tilemap map;
     [SerializeField]
     private List<TileType> tileTypes = new List<TileType>();
 
