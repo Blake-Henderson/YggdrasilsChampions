@@ -38,25 +38,4 @@ public class Board : MonoBehaviour
         }
         return ret;
     }
-    
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (plane.Raycast(ray, out float enter))
-            {
-                Vector3 mouse = ray.GetPoint(enter);
-                Vector3Int gridPos = map.WorldToCell(mouse);
-                Debug.Log(Input.mousePosition + " " + mouse + " " + gridPos);
-                TileBase tile = map.GetTile(gridPos);
-
-                Debug.Log("Tile at " + gridPos + " is of type " + baseTypeDict[tile]); //assuming its in the dict rn
-                string str = "Tile at " + gridPos + " walkable neighbors: \n";
-                Vector3Int[] neighbors = GetNeighbors(gridPos);
-                foreach (Vector3Int v in neighbors) str += v.ToString() + '\n';
-                Debug.Log(str);
-            }
-        }
-    }
 }
