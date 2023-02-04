@@ -2,13 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Battle : MonoBehaviour
 {
     public GameObject BattlePanel;
+    public GameObject CutInPanel;
 
+    //These are the images for the cut-in animation
     public Image C1Bust;
     public Image C2Bust;
+
+    //These are the images for the characters
+    public Image C1Battle;
+    public Image C2Battle;
+
+    //This is the textboxes to display character 1's stats and health
+    public Slider C1HealthBar;
+    public TextMeshProUGUI C1HealthText;
+    public TextMeshProUGUI C1AtkText;
+    public TextMeshProUGUI C1DefText;
+    public TextMeshProUGUI C1SpdText;
+    public TextMeshProUGUI C1EvdText;
+
+    //This is the textboxes to display character 2's stats and health
+    public Slider C2HealthBar;
+    public TextMeshProUGUI C2HealthText;
+    public TextMeshProUGUI C2AtkText;
+    public TextMeshProUGUI C2DefText;
+    public TextMeshProUGUI C2SpdText;
+    public TextMeshProUGUI C2EvdText;
 
     //This is the image that we will apply the Die facing on
     public Image DiceD6;
@@ -36,7 +59,9 @@ public class Battle : MonoBehaviour
         bs = BattleState.START;
         C1Bust.sprite = c1.stats.sprite;
         C2Bust.sprite = c2.stats.sprite;
-        BattlePanel.SetActive(true);
+        C1Battle.sprite = c1.stats.sprite;
+        C2Battle.sprite = c2.stats.sprite;
+        CutInPanel.SetActive(true);
 
     }
 
@@ -51,6 +76,8 @@ public class Battle : MonoBehaviour
                 break;
 
             case BattleState.RESOLUTION:
+                CutInPanel.SetActive(false);
+                BattlePanel.SetActive(true);
                 resolution();
                 break;
 
@@ -64,6 +91,7 @@ public class Battle : MonoBehaviour
 
             case BattleState.OFF:
                 BattlePanel.SetActive(false);
+                CutInPanel.SetActive(false);
                 break;
             //If we are somehow outside of entirety of the enum then just turn the state to off
             default:
