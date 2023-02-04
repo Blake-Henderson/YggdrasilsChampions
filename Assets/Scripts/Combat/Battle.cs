@@ -103,7 +103,7 @@ public class Battle : MonoBehaviour
                 break;
 
             case BattleState.END:
-
+                ending();
                 break;
 
             //Start and Off do nothing as both are covered in the battlestart function
@@ -120,6 +120,30 @@ public class Battle : MonoBehaviour
                 break;
         }
     }
+
+    //Turns everything off and resets boolean values
+    private void ending()
+    {
+        BUI.setC1But(false);
+        BUI.setC2But(false);
+        BUI.setC2Roll(false);
+        BUI.setC1Roll(false);
+
+        timer = true;
+        firstTurn = true;
+        decidingTurn = true;
+        c1turn = true;
+        c2turn = false;
+        c1rolled = false;
+        c2rolled = false;
+        lastRoll = false;
+        dmgResolve = false;
+
+        BUI.battlePan(false);
+        BUI.cutinPan(false);
+
+        bs = BattleState.OFF;
+}
 
     //This resolves for turns
     private void resolution()
@@ -257,11 +281,9 @@ public class Battle : MonoBehaviour
 
                     if (!timer)
                     {
-                        //prevents multihit
-                        if (c1rolled && c2rolled)
-                        {
-                            c2temp.stats.takeDamage(damage);
-                        }
+
+                        c2temp.stats.takeDamage(damage);
+
                         c1rolled = false;
                         c2rolled = false;
 
@@ -271,6 +293,7 @@ public class Battle : MonoBehaviour
                         Debug.Log("C2 health: " + c2temp.stats.health);
                         if(c2temp.stats.health < 1)
                         {
+                            Debug.Log("In WIN");
                             BUI.setBattleText(c1temp.stats.name + " WINS");
                             bs = BattleState.END;
                         }
@@ -278,10 +301,10 @@ public class Battle : MonoBehaviour
                         {
                             c1turn = false;
                             c2turn = true;
-                            
+                            dmgResolve = true;
                         }
                         timer = true;
-                        dmgResolve = true;
+                        
 
                     }
                     else
@@ -305,7 +328,7 @@ public class Battle : MonoBehaviour
 
                     if (!timer)
                     {
-                        if (c1rolled && c2rolled && c2evd < damage)
+                        if (c2evd <= damage)
                         {
                             c2temp.stats.takeDamage(damage);
                         }
@@ -319,6 +342,7 @@ public class Battle : MonoBehaviour
 
                         if (c2temp.stats.health < 1)
                         {
+                            Debug.Log("In WIN");
                             BUI.setBattleText(c1temp.stats.name + " WINS");
                             bs = BattleState.END;
                         }
@@ -326,9 +350,9 @@ public class Battle : MonoBehaviour
                         {
                             c1turn = false;
                             c2turn = true;
+                            dmgResolve = true;
                         }
                         timer = true;
-                        dmgResolve = true;
 
                     }
                     else
@@ -401,11 +425,7 @@ public class Battle : MonoBehaviour
 
                     if (!timer)
                     {
-                        //prevents multihit
-                        if (c1rolled && c2rolled)
-                        {
-                            c1temp.stats.takeDamage(damage);
-                        }
+                        c1temp.stats.takeDamage(damage);
                         c1rolled = false;
                         c2rolled = false;
 
@@ -416,6 +436,7 @@ public class Battle : MonoBehaviour
 
                         if (c1temp.stats.health < 1)
                         {
+                            Debug.Log("In WIN");
                             BUI.setBattleText(c2temp.stats.name + " WINS");
                             bs = BattleState.END;
                         }
@@ -423,9 +444,9 @@ public class Battle : MonoBehaviour
                         {
                             c1turn = true;
                             c2turn = false;
+                            dmgResolve = true;
                         }
                         timer = true;
-                        dmgResolve = true;
 
                     }
                     else
@@ -449,7 +470,7 @@ public class Battle : MonoBehaviour
 
                     if (!timer)
                     {
-                        if (c1rolled && c2rolled && c1evd < damage)
+                        if (c1evd <= damage)
                         {
                             c1temp.stats.takeDamage(damage);
                         }
@@ -463,16 +484,17 @@ public class Battle : MonoBehaviour
 
                         if (c1temp.stats.health < 1)
                         {
+                            Debug.Log("In WIN");
                             BUI.setBattleText(c2temp.stats.name + " WINS");
                             bs = BattleState.END;
                         }
                         else
                         {
-                            c1turn = false;
-                            c2turn = true;
+                            c1turn = true;
+                            c2turn = false;
+                            dmgResolve = true;
                         }
                         timer = true;
-                        dmgResolve = true;
 
                     }
                     else

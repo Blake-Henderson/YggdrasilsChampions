@@ -18,5 +18,5 @@ MonoBehaviour:
   health: 20
   attack: 5
   defense: 5
-  speed: 5
+  speed: 10
   evade: 3
