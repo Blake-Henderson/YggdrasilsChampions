@@ -13,7 +13,7 @@ public class Stats : ScriptableObject
     public int attack;
     public int defense;
     public int speed;
-    public int eveade;
+    public int evade;
 
     public void raiseStat(int input, int amount)
     {
@@ -32,7 +32,7 @@ public class Stats : ScriptableObject
                 speed += amount;
                 break;
             case 4:
-                eveade += amount;
+                evade += amount;
                 break;
             default:
                 Debug.Log("Error unknown stat");
@@ -64,6 +64,6 @@ public class Stats : ScriptableObject
 
     public int getRenown()
     {
-        return hp + attack + defense + speed + eveade;
+        return hp + attack + defense + speed + evade;
     }
 }
