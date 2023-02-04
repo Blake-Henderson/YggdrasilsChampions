@@ -2152,6 +2152,7 @@ MonoBehaviour:
   - {fileID: 1290410831}
   ch: {fileID: 1693311821}
   timeToNextMove: 0
+  pause: 0
 --- !u!4 &1221917911
 Transform:
   m_ObjectHideFlags: 0

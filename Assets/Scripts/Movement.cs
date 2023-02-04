@@ -10,19 +10,25 @@ public class Movement : MonoBehaviour
     public GameObject[] buttons = new GameObject[4];
     public Character ch;
     public float timeToNextMove = 0f;
+    int movesRemaining = 0;
 
     private void Start()
     {
-        MoveCharacter(tilemap.WorldToCell(ch.transform.position));
+        MoveCharacter(tilemap.WorldToCell(ch.transform.position), true);
     }
 
-    void MoveCharacter(Vector3Int cell)
+    void MoveCharacter(Vector3Int cell, bool initialMove = false)
     {
         foreach (GameObject o in buttons) o.SetActive(false);
         ch.lastTile = ch.currentTile;
         ch.currentTile = cell;
         ch.transform.position = tilemap.CellToWorld(ch.currentTile) + tilemap.tileAnchor;
         timeToNextMove = 0.5f;
+        if (!initialMove)
+        {
+            board.StepOnTile(cell);
+            if (movesRemaining == 0) board.EndOnTile(cell);
+        }
     }
 
     public void MoveCharacter(int index)
