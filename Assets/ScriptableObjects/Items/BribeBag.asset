@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BribeBag
   m_EditorClassIdentifier: 
   type: Bribe Bag
-  description: Escape one encounter unharmed
+  description: Escape one encounter unharmed (Battle Only)
   mapItem: 0

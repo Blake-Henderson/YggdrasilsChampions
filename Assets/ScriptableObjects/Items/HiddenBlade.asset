@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f3458624541d2468d225b48bc40dba, type: 3}
   m_Name: HiddenBlade
   m_EditorClassIdentifier: 
-  type: 
-  description: 
+  type: Hidden Blade
+  description: Raises attack by two for this encounter (Battle Only)
   mapItem: 0

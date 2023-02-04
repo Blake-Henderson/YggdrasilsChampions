@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f3458624541d2468d225b48bc40dba, type: 3}
   m_Name: StatBoost
   m_EditorClassIdentifier: 
+  type: Stat Boost
+  description: Raise a random stat by one permanently
+  mapItem: 1

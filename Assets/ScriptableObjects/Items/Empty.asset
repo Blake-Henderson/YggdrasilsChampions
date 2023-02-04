@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f3458624541d2468d225b48bc40dba, type: 3}
   m_Name: Empty
   m_EditorClassIdentifier: 
-  type: 
-  description: 
-  mapItem: 0
+  type: Empty
+  description: empty
+  mapItem: 1
