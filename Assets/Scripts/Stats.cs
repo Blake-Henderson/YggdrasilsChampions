@@ -1,18 +1,44 @@
+//Author:Blake Henderson
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stats : MonoBehaviour
+[CreateAssetMenu(fileName = "Stats", menuName = "ScriptableObjects/Stats", order = 1)]
+public class Stats : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    int hp;
+    int attack;
+    int defense;
+    int speed;
+    int eveade;
+
+    public void raiseStat(int input, int ammount)
     {
-        
+        switch (input)
+        {
+            case 0:
+                hp += ammount;
+                break;
+            case 1:
+                attack += ammount;
+                break;
+            case 2:
+                defense += ammount;
+                break;
+            case 3:
+                speed += ammount;
+                break;
+            case 4:
+                eveade += ammount;
+                break;
+            default:
+                Debug.Log("Error unknown stat");
+                break;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public int getRenown()
     {
-        
+        return hp + attack + defense + speed + eveade;
     }
 }
