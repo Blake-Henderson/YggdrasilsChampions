@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
     public Vector3Int lastTile;
     public Item empty;
     public Item[] inventory = new Item[3];
+    public bool AIControled = false;
     private void Start()
     {
         for(int i = 0; i<3; i++)
