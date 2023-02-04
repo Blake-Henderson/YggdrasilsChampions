@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa69e60b174a2684bb2269c3d03a7f8a, type: 3}
-  m_Name: FightTile
-  m_EditorClassIdentifier: Assembly-CSharp::FightTile
+  m_Script: {fileID: 11500000, guid: 56041a7679caa58459e0d6915163ae7b, type: 3}
+  m_Name: RedTile 3
+  m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: 6352a65c5a757af40a5ade9ed3208f69, type: 2}
+  - {fileID: 11400000, guid: 8f518241f6376b043ba56d6b1e7b190f, type: 2}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: RedTile
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: 68533624f63c4da41b99eceb11aebcda, type: 2}
+  - {fileID: 11400000, guid: 13bf9b4a43089734e94e7b679047e1d6, type: 2}

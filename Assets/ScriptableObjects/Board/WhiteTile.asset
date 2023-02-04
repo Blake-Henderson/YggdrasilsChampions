@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: WhiteTile
   m_EditorClassIdentifier: 
   tiles:
-  - {fileID: 11400000, guid: 405d8843d03086d4992ad98a53c342a9, type: 2}
+  - {fileID: 11400000, guid: 3a88fe908566f6440ab5c85f88c8b888, type: 2}
