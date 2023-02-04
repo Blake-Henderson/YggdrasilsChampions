@@ -7,4 +7,7 @@ using UnityEngine.Tilemaps;
 public class TileType : ScriptableObject
 {
     public TileBase[] tiles;
+
+    public void OnStep() { } 
+    public void OnEnd() { }
 }
