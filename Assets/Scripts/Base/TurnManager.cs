@@ -13,11 +13,15 @@ public class TurnManager : MonoBehaviour
     private int moveDirection;
     
     public GameObject[] dirButtons = new GameObject[4];
+    public GameObject dirButtonContainer;
     public GameObject rollButton;
     public GameObject results, resultsConfirm;
     public TextMeshProUGUI resultsText;
 
+    public OccupiedTileSelect occupiedCanvas;
+
     int moves;
+    bool needOptions;
 
     private void Start()
     {
@@ -41,7 +45,7 @@ public class TurnManager : MonoBehaviour
     {
         yield return new WaitForSeconds(AIWaitTime);
         results.SetActive(false);
-        Move(moves);
+        Move();
     }
 
     void PromptRoll()
@@ -59,7 +63,7 @@ public class TurnManager : MonoBehaviour
 
     public void Roll()
     {
-        int movement = Random.Range(1, 6);
+        int movement = Random.Range(1, 7);
         if (gm.AIturn)
         {
             DisplayRoll(movement);
@@ -69,11 +73,6 @@ public class TurnManager : MonoBehaviour
         {
             DisplayRoll(movement, true);
         }
-    }
-
-    public void Move()
-    {
-        Move(moves);
     }
 
     public void MoveCharacter(int index)
@@ -88,18 +87,42 @@ public class TurnManager : MonoBehaviour
         characters[gm.turnCount].lastTile = characters[gm.turnCount].currentTile;
         characters[gm.turnCount].currentTile = cell;
         characters[gm.turnCount].transform.position = board.map.CellToWorld(characters[gm.turnCount].currentTile) + board.map.tileAnchor;
-        board.StepOnTile(cell);
     }
 
-    public void Move(int spaces)
+    public void FinishInterrupt(bool fight)
     {
-        Debug.Log(spaces);
-        if(spaces >= 1)
+        bool interrupt = false;
+        if (fight) interrupt = board.StepOnTile(characters[gm.turnCount].currentTile);
+        if (!interrupt) Move();
+    }
+
+    public List<Character> OthersOccupyingTile(Character entering)
+    {
+        List<Character> ret = new List<Character>();
+        foreach (Character c in characters)
         {
+            if (c == entering) continue;
+            if (c.currentTile == entering.currentTile) ret.Add(c);
+        }
+        return ret;
+    }
+
+    public void MoveSelectionMade()
+    {
+        bool interrupted = HandleTileInteractions();
+        if (!interrupted) Move();
+    }
+
+    public void Move()
+    {
+
+        foreach (GameObject o in dirButtons) o.SetActive(false);
+        dirButtonContainer.SetActive(true);
+        while (moves > 0)
+        {
+            moves--;
             if (gm.AIturn)
             {
-                //go random direction if needed
-                //avoid last tile
                 Vector3Int[] n = board.GetNeighbors(characters[gm.turnCount].currentTile);
                 List<int> valid = new List<int>();
                 for (int i = 0; i < 4; ++i)
@@ -112,15 +135,21 @@ public class TurnManager : MonoBehaviour
                 if (valid.Count == 0)
                 {
                     MoveCharacter(characters[gm.turnCount].lastTile);
-                } else
+                }
+                else
                 {
                     MoveCharacter(n[valid[Random.Range(0, valid.Count)]]);
                 }
-                Move(spaces - 1);
-                //move characters[gm.turnCount].GameObject movement number of spaces
-            }
-            else
+                List<Character> occupying = OthersOccupyingTile(characters[gm.turnCount]);
+                if (occupying.Count > 0)
+                {
+                    //choose whether to fight occupying characters
+                }
+                bool interrupt = board.StepOnTile(characters[gm.turnCount].currentTile);
+                if (interrupt) return;
+            } else
             {
+                Debug.Log(moves);
                 foreach (GameObject o in dirButtons) o.SetActive(false);
                 //pick direction if nessicary
                 Vector3Int[] n = board.GetNeighbors(characters[gm.turnCount].currentTile);
@@ -135,39 +164,56 @@ public class TurnManager : MonoBehaviour
                         options++;
                     }
                 }
+                Vector3Int target = new Vector3Int(-99999, -99999);
                 if (options == 0)
                 {
-                    MoveCharacter(characters[gm.turnCount].lastTile);
-                    Move(spaces - 1);
+                    target = characters[gm.turnCount].lastTile;
                 }
                 else if (options == 1)
                 {
-                    MoveCharacter(only);
-                    Move(spaces - 1);
-                } else
-                {
-                    moves = spaces - 1;
+                    target = only;
                 }
-                //move characters[gm.turnCount].GameObject movement number of spaces
+                if (target != new Vector3Int(-99999, -99999))
+                {
+                    MoveCharacter(target);
+                    bool interrupted = HandleTileInteractions();
+                    if (interrupted) return;
+                }
+                else //player needs to make a choice
+                {
+                    return; //wait for player input if not at end of movement
+                }
             }
+        }
+        foreach (GameObject o in dirButtons) o.SetActive(false);
+        board.EndOnTile(characters[gm.turnCount].currentTile);
+        //check tile type
+        //resolve tile effect if any;
+        gm.incrementTurn();
+        if (!gm.AIturn)
+        {
+            PromptRoll();
         }
         else
         {
-            foreach (GameObject o in dirButtons) o.SetActive(false);
-            board.EndOnTile(characters[gm.turnCount].currentTile);
-            //check tile type
-            //resolve tile effect if any;
-            gm.incrementTurn();
-            if (!gm.AIturn)
-            {
-                PromptRoll();
-            }
-            else
-            {
-                AIStall();
-                Roll();
-            }
-        }        
+            AIStall();
+            Roll();
+        }
+    }
+
+    public bool HandleTileInteractions()
+    {
+
+        List<Character> occupying = OthersOccupyingTile(characters[gm.turnCount]);
+        Debug.Log(moves + " " + occupying.Count);
+        if (occupying.Count > 0)
+        {
+            dirButtonContainer.SetActive(false);
+            occupiedCanvas.DisplayOptions(occupying);
+            return true;
+        }
+        bool interrupt = board.StepOnTile(characters[gm.turnCount].currentTile);
+        return interrupt;
     }
 
     /// <summary>

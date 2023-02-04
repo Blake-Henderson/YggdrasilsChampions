@@ -25,10 +25,10 @@ public class Board : MonoBehaviour
         }
     }
 
-    public void StepOnTile(Vector3Int pos)
+    public bool StepOnTile(Vector3Int pos)
     {
         TileBase tile = map.GetTile(pos);
-        baseTypeDict[tile].OnStep();
+        return baseTypeDict[tile].OnStep();
     }
 
     public void EndOnTile(Vector3Int pos)
