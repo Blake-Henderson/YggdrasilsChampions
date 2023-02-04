@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cfeff42ca20444989eb47ab7b5de62, type: 3}
   m_Name: HumanStats
   m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
   hp: 3
+  health: 3
   attack: 3
   defense: 3
   speed: 3
-  eveade: 3
+  evade: 0

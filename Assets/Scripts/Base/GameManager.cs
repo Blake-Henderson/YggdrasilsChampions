@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int playercount;
-    public int turnCount = 1;
+    public int turnCount = 0;
+    public bool AIturn;
     GameManager instance;
 
     private void Start()
@@ -19,23 +20,23 @@ public class GameManager : MonoBehaviour
     /// Returns true for a players turn and false for an AI's turn
     /// </summary>
     /// <returns></returns>
-    public bool incrementTurn()
+    public void incrementTurn()
     {
-        if(turnCount < 4)
+        if(turnCount < 3)
         {
             turnCount++;
         }
         else
         {
-            turnCount = 1;
+            turnCount = 0;
         }
-        if(turnCount > playercount && turnCount < 4)
+        if(turnCount > playercount && turnCount < 3)
         {
-            return false;
+            AIturn = true;
         }
         else
         {
-            return true;
+            AIturn = false;
         }
     }
 }

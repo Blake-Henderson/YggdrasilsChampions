@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cfeff42ca20444989eb47ab7b5de62, type: 3}
   m_Name: EnemyTwo
   m_EditorClassIdentifier: 
-  hp: 0
-  health: 0
-  attack: 0
-  defense: 0
-  speed: 0
-  eveade: 0
+  sprite: {fileID: 0}
+  hp: 10
+  health: 10
+  attack: 2
+  defense: 5
+  speed: 2
+  evade: 0
