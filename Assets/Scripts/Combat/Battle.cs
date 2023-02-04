@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class Battle : MonoBehaviour
 {
+    public static Battle instance; //Static instance so any script can get to the Battle prefab by doing Battle.instance
+    public UnityEvent finishEvent; //event to be called when battle is finished, so we can give control back to the scripts that started the battle
+
     //Strings for exactly what they are named after
     public string turnOrderPrompt;
     public string rollPromt;
@@ -70,6 +74,12 @@ public class Battle : MonoBehaviour
     }
     //The varaible for said enum
     public BattleState bs = BattleState.OFF;
+
+    private void Awake()
+    {
+        instance = this;
+        BUI = GetComponent<BattleUI>();
+    }
 
     //This will start the battle and play the animations for the characters in question
     public void BattleStart(Character c1, Character c2)
@@ -143,6 +153,8 @@ public class Battle : MonoBehaviour
         BUI.cutinPan(false);
 
         bs = BattleState.OFF;
+
+        finishEvent?.Invoke();
 }
 
     //This resolves for turns

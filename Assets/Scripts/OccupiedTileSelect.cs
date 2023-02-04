@@ -31,7 +31,16 @@ public class OccupiedTileSelect : MonoBehaviour
     public void Fight(int i)
     {
         Debug.Log("Fighting " + toFight[i].name);
+        Battle.instance.finishEvent.AddListener(FightComplete);
+        Battle.instance.BattleStart(manager.characters[manager.gm.turnCount], toFight[i]);
         toFight.RemoveAt(i);
+        container.SetActive(false);
+    }
+
+    public void FightComplete()
+    {
+        Battle.instance.finishEvent.RemoveListener(FightComplete);
+        container.SetActive(true);
         DisplayOptions();
     }
 
