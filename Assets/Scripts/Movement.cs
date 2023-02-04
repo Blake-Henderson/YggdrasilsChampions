@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     public Board board;
     public Tilemap tilemap;
     public GameObject[] buttons = new GameObject[4];
+    public GameObject rollButton;
     public Character ch;
     public float timeToNextMove = 0f;
     public bool pause = false;
@@ -28,8 +29,29 @@ public class Movement : MonoBehaviour
         if (!initialMove)
         {
             board.StepOnTile(cell);
-            if (movesRemaining == 0) board.EndOnTile(cell);
+            movesRemaining--;
+            if (movesRemaining == 0)
+            {
+                board.EndOnTile(cell);
+                RollPrompt();
+            }
+        } else
+        {
+            RollPrompt();
         }
+    }
+
+    void RollPrompt()
+    {
+        pause = true;
+        rollButton.SetActive(true);
+    }
+
+    public void Roll()
+    {
+        movesRemaining = Random.Range(1, 7);
+        rollButton.SetActive(false);
+        pause = false;
     }
 
     public void MoveCharacter(int index)
@@ -65,12 +87,16 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        if (timeToNextMove <= 0f)
+        if (!pause)
         {
-            HandleMove();
-        } else if (!pause)
-        {
-            timeToNextMove -= Time.deltaTime;
+            if (timeToNextMove <= 0f)
+            {
+                HandleMove();
+            }
+            else
+            {
+                timeToNextMove -= Time.deltaTime;
+            }
         }
     }
 }
