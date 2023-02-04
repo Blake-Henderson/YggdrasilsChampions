@@ -6,11 +6,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Stats", menuName = "ScriptableObjects/Stats", order = 1)]
 public class Stats : ScriptableObject
 {
-    int hp;
-    int attack;
-    int defense;
-    int speed;
-    int eveade;
+    public int hp;
+    public int attack;
+    public int defense;
+    public int speed;
+    public int eveade;
 
     public void raiseStat(int input, int ammount)
     {
