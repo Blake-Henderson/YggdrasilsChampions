@@ -5,10 +5,11 @@ using TMPro;
 
 public class TurnManager : MonoBehaviour
 {
+    public static TurnManager instance;
+
     public Board board;
     public GameManager gm;
     float AIWaitTime = 1;
-    [SerializeField]
     public List<Character> characters;
     private int moveDirection;
     
@@ -25,6 +26,7 @@ public class TurnManager : MonoBehaviour
 
     private void Start()
     {
+        instance = this;
         foreach (Character c in characters) //place initial character
         {
             c.lastTile = c.currentTile;
