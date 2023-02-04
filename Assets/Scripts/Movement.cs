@@ -10,6 +10,7 @@ public class Movement : MonoBehaviour
     public GameObject[] buttons = new GameObject[4];
     public Character ch;
     public float timeToNextMove = 0f;
+    public bool pause = false;
     int movesRemaining = 0;
 
     private void Start()
@@ -67,7 +68,7 @@ public class Movement : MonoBehaviour
         if (timeToNextMove <= 0f)
         {
             HandleMove();
-        } else
+        } else if (!pause)
         {
             timeToNextMove -= Time.deltaTime;
         }
