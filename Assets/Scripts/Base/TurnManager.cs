@@ -104,7 +104,7 @@ public class TurnManager : MonoBehaviour
         foreach (Character c in characters)
         {
             if (c == entering) continue;
-            if (c.currentTile == entering.currentTile) ret.Add(c);
+            if (c.currentTile == entering.currentTile && c.stats.health > 0) ret.Add(c);
         }
         return ret;
     }
