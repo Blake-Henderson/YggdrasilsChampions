@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cfeff42ca20444989eb47ab7b5de62, type: 3}
   m_Name: Yggdrasil
   m_EditorClassIdentifier: 
+  title: 
   sprite: {fileID: 0}
   hp: 25
   health: 25
   attack: 8
   defense: 10
   speed: 10
-  evade: 0
+  evade: 4
