@@ -9,7 +9,7 @@ public class TurnManager : MonoBehaviour
     public GameManager gm;
     float AIWaitTime = 1;
     [SerializeField]
-    List<Character> characters;
+    public List<Character> characters;
     private int moveDirection;
     
     public GameObject[] dirButtons = new GameObject[4];
