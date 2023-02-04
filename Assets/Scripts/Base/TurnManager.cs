@@ -186,9 +186,15 @@ public class TurnManager : MonoBehaviour
             }
         }
         foreach (GameObject o in dirButtons) o.SetActive(false);
-        board.EndOnTile(characters[gm.turnCount].currentTile);
+        bool endInterrupt = board.EndOnTile(characters[gm.turnCount].currentTile);
+        if (!endInterrupt) EndTurn();
         //check tile type
         //resolve tile effect if any;
+    }
+
+    public void EndTurn()
+    {
+
         gm.incrementTurn();
         if (!gm.AIturn)
         {

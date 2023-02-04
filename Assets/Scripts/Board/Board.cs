@@ -31,10 +31,10 @@ public class Board : MonoBehaviour
         return baseTypeDict[tile].OnStep();
     }
 
-    public void EndOnTile(Vector3Int pos)
+    public bool EndOnTile(Vector3Int pos)
     {
         TileBase tile = map.GetTile(pos);
-        baseTypeDict[tile].OnEnd();
+        return baseTypeDict[tile].OnEnd();
     }
 
     static Vector3Int[] directions = { new Vector3Int(0, 1), new Vector3Int(1, 0), new Vector3Int(0, -1), new Vector3Int(-1, 0) };
