@@ -25,6 +25,19 @@ public class Board : MonoBehaviour
             }
         }
     }
+
+    static Vector3Int[] directions = { new Vector3Int(0, 1), new Vector3Int(1, 0), new Vector3Int(0, -1), new Vector3Int(-1, 0) };
+
+    public Vector3Int[] GetNeighbors(Vector3Int pos)
+    {
+        Vector3Int[] ret = new Vector3Int[4];
+        for (int i = 0; i < 4; ++i)
+        {
+            TileBase tile = map.GetTile(pos + directions[i]);
+            ret[i] = tile == null ? new Vector3Int(-99999, -99999) : pos + directions[i];
+        }
+        return ret;
+    }
     
     void Update()
     {
@@ -39,6 +52,10 @@ public class Board : MonoBehaviour
                 TileBase tile = map.GetTile(gridPos);
 
                 Debug.Log("Tile at " + gridPos + " is of type " + baseTypeDict[tile]); //assuming its in the dict rn
+                string str = "Tile at " + gridPos + " walkable neighbors: \n";
+                Vector3Int[] neighbors = GetNeighbors(gridPos);
+                foreach (Vector3Int v in neighbors) str += v.ToString() + '\n';
+                Debug.Log(str);
             }
         }
     }
