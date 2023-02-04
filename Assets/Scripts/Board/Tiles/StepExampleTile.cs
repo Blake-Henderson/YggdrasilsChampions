@@ -5,8 +5,9 @@ using UnityEngine;
 [CreateAssetMenu]
 public class StepExampleTile : TileType
 {
-    public override void OnStep()
+    public override bool OnStep()
     {
-        Debug.Log("Tile stepped on!");
+        //Debug.Log("Tile stepped on!");
+        return false;
     }
 }
