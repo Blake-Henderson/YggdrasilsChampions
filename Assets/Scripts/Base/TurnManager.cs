@@ -89,10 +89,10 @@ public class TurnManager : MonoBehaviour
         characters[gm.turnCount].transform.position = board.map.CellToWorld(characters[gm.turnCount].currentTile) + board.map.tileAnchor;
     }
 
-    public void FinishInterrupt(bool fight)
+    public void FinishInterrupt(bool occupiedTileInterrupt)
     {
         bool interrupt = false;
-        if (fight) interrupt = board.StepOnTile(characters[gm.turnCount].currentTile);
+        if (occupiedTileInterrupt) interrupt = board.StepOnTile(characters[gm.turnCount].currentTile);
         if (!interrupt) Move();
     }
 
