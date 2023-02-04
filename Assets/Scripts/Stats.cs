@@ -7,33 +7,56 @@ using UnityEngine;
 public class Stats : ScriptableObject
 {
     public int hp;
+    public int health;
     public int attack;
     public int defense;
     public int speed;
     public int eveade;
 
-    public void raiseStat(int input, int ammount)
+    public void raiseStat(int input, int amount)
     {
         switch (input)
         {
             case 0:
-                hp += ammount;
+                hp += amount;
                 break;
             case 1:
-                attack += ammount;
+                attack += amount;
                 break;
             case 2:
-                defense += ammount;
+                defense += amount;
                 break;
             case 3:
-                speed += ammount;
+                speed += amount;
                 break;
             case 4:
-                eveade += ammount;
+                eveade += amount;
                 break;
             default:
                 Debug.Log("Error unknown stat");
                 break;
+        }
+    }
+
+
+    public void heal(int amount)
+    {
+        if (health < hp)
+        {
+            health += amount;
+        }
+        if (health > hp)
+        {
+            health = hp;
+        }
+    }
+
+    public void takeDamage(int amount)
+    {
+        health -= amount;
+        if (health <= 0)
+        {
+            //die
         }
     }
 
