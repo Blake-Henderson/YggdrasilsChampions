@@ -149,7 +149,6 @@ public class TurnManager : MonoBehaviour
                 if (interrupt) return;
             } else
             {
-                Debug.Log(moves);
                 foreach (GameObject o in dirButtons) o.SetActive(false);
                 //pick direction if nessicary
                 Vector3Int[] n = board.GetNeighbors(characters[gm.turnCount].currentTile);
@@ -209,9 +208,7 @@ public class TurnManager : MonoBehaviour
 
     public bool HandleTileInteractions()
     {
-
         List<Character> occupying = OthersOccupyingTile(characters[gm.turnCount]);
-        Debug.Log(moves + " " + occupying.Count);
         if (occupying.Count > 0)
         {
             dirButtonContainer.SetActive(false);
