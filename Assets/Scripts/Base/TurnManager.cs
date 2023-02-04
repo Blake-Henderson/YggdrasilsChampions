@@ -197,14 +197,22 @@ public class TurnManager : MonoBehaviour
     {
 
         gm.incrementTurn();
-        if (!gm.AIturn)
+        if (characters[gm.turnCount].stats.health <= 0) //player is KO, skip turn for heal
         {
-            PromptRoll();
-        }
-        else
+            characters[gm.turnCount].stats.heal(9999);
+            EndTurn();
+        } else
         {
-            AIStall();
-            Roll();
+            if (!gm.AIturn)
+            {
+                PromptRoll();
+            }
+            else
+            {
+                AIStall();
+                Roll();
+            }
+
         }
     }
 
