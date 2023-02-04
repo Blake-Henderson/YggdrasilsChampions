@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
     public GameManager gm;
     public TurnManager tm;
-
+    public Item empty;
     private int inventorySlot = 0;
     public GameObject inventoryPanel;
+    public GameObject rollManager;
     public GameObject slot1;
     public GameObject slot2;
     public GameObject slot3;
@@ -17,12 +20,13 @@ public class Inventory : MonoBehaviour
     public void pullUpInventory()
     {
         inventoryPanel.SetActive(true);
+        rollManager.SetActive(false);
         inventorySlot = 0;
         setDescription();
         Item[] items = tm.characters[gm.turnCount].inventory;
-        slot1.GetComponent<TextMesh>().text = tm.characters[gm.turnCount].inventory[0].type;
-        slot2.GetComponent<TextMesh>().text = tm.characters[gm.turnCount].inventory[1].type;
-        slot3.GetComponent<TextMesh>().text = tm.characters[gm.turnCount].inventory[2].type;
+        slot1.GetComponent<TextMeshProUGUI>().text = tm.characters[gm.turnCount].inventory[0].type;
+        slot2.GetComponent<TextMeshProUGUI>().text = tm.characters[gm.turnCount].inventory[1].type;
+        slot3.GetComponent<TextMeshProUGUI>().text = tm.characters[gm.turnCount].inventory[2].type;
     }
 
     public void pullUpInventory(Character c)
@@ -31,19 +35,19 @@ public class Inventory : MonoBehaviour
         inventorySlot = 0;
         setDescription(c);
         Item[] items = tm.characters[gm.turnCount].inventory;
-        slot1.GetComponent<TextMesh>().text = c.inventory[0].type;
-        slot2.GetComponent<TextMesh>().text = c.inventory[1].type;
-        slot3.GetComponent<TextMesh>().text = c.inventory[2].type;
+        slot1.GetComponent<TextMeshProUGUI>().text = c.inventory[0].type;
+        slot2.GetComponent<TextMeshProUGUI>().text = c.inventory[1].type;
+        slot3.GetComponent<TextMeshProUGUI>().text = c.inventory[2].type;
     }
 
     public void setDescription()
     {
-        descriptionBox.GetComponent<TextMesh>().text = tm.characters[gm.turnCount].inventory[inventorySlot].type;
+        descriptionBox.GetComponent<TextMeshProUGUI>().text = tm.characters[gm.turnCount].inventory[inventorySlot].type;
     }
 
     public void setDescription(Character c)
     {
-        descriptionBox.GetComponent<TextMesh>().text =c.inventory[inventorySlot].type;
+        descriptionBox.GetComponent<TextMeshProUGUI>().text =c.inventory[inventorySlot].type;
     }
     public void useItem()
     {
@@ -51,24 +55,26 @@ public class Inventory : MonoBehaviour
         switch (item.type)
         {
             case "Stat Boost":
+                tm.characters[gm.turnCount].inventory[inventorySlot] = empty;
+                pullUpInventory();
                 int choice = Random.Range(1, 5);
                 tm.characters[gm.turnCount].stats.raiseStat(choice, 1);
                 switch (choice)
                 {
                     case 0:
-                        //hp increased display
+                        descriptionBox.GetComponent<TextMeshProUGUI>().text = "HP increased!";
                         break;
                     case 1:
-                        //attack increased display
+                        descriptionBox.GetComponent<TextMeshProUGUI>().text = "Attack increased!";
                         break;
                     case 2:
-                        //defense increased display
+                        descriptionBox.GetComponent<TextMeshProUGUI>().text = "Defense increased!";
                         break;
                     case 3:
-                        //speed increased display
+                        descriptionBox.GetComponent<TextMeshProUGUI>().text = "Speed increased!";
                         break;
                     case 4:
-                        //evade increased display
+                        descriptionBox.GetComponent<TextMeshProUGUI>().text = "Evade increased!";
                         break;
                     default:
                         break;
@@ -77,6 +83,7 @@ public class Inventory : MonoBehaviour
             default:
                 break;
         }
+        rollManager.SetActive(true);
         inventoryPanel.SetActive(false);
     }
     public void useItem(Character c)
@@ -122,6 +129,7 @@ public class Inventory : MonoBehaviour
 
     public void close()
     {
+        rollManager.SetActive(true);
         inventoryPanel.SetActive(false);
     }
 }
