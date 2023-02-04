@@ -42,12 +42,12 @@ public class Inventory : MonoBehaviour
 
     public void setDescription()
     {
-        descriptionBox.GetComponent<TextMeshProUGUI>().text = tm.characters[gm.turnCount].inventory[inventorySlot].type;
+        descriptionBox.GetComponent<TextMeshProUGUI>().text = tm.characters[gm.turnCount].inventory[inventorySlot].description;
     }
 
     public void setDescription(Character c)
     {
-        descriptionBox.GetComponent<TextMeshProUGUI>().text =c.inventory[inventorySlot].type;
+        descriptionBox.GetComponent<TextMeshProUGUI>().text =c.inventory[inventorySlot].description;
     }
     public void useItem()
     {
@@ -83,8 +83,6 @@ public class Inventory : MonoBehaviour
             default:
                 break;
         }
-        rollManager.SetActive(true);
-        inventoryPanel.SetActive(false);
     }
     public void useItem(Character c)
     {
