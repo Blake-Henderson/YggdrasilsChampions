@@ -1,25 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TurnManager : MonoBehaviour
 {
     public Board board;
-    GameManager gm;
+    public GameManager gm;
     float AIWaitTime = 1;
+    [SerializeField]
     List<Character> characters;
     private int moveDirection;
+    
+    public GameObject[] dirButtons = new GameObject[4];
+    public GameObject rollButton;
+    public GameObject results, resultsConfirm;
+    public TextMeshProUGUI resultsText;
+
+    int moves;
 
     private void Start()
     {
-        foreach (Character c in characters) //initial char locations
+        foreach (Character c in characters) //place initial character
         {
             c.lastTile = c.currentTile;
             c.currentTile = board.map.WorldToCell(c.transform.position);
             c.transform.position = board.map.CellToWorld(c.currentTile) + board.map.tileAnchor;
 
         }
-        //Display Roll UI
+        PromptRoll();
     }
 
 
@@ -28,20 +37,50 @@ public class TurnManager : MonoBehaviour
         yield return new WaitForSeconds(AIWaitTime);
     }
 
+    IEnumerator AIDelayToShowRoll()
+    {
+        yield return new WaitForSeconds(AIWaitTime);
+        results.SetActive(false);
+        Move(moves);
+    }
+
+    void PromptRoll()
+    {
+        rollButton.SetActive(true);
+    }
+
+    void DisplayRoll(int result, bool confirmButton = false)
+    {
+        results.SetActive(true);
+        resultsText.text = result.ToString();
+        moves = result;
+        resultsConfirm.SetActive(confirmButton);
+    }
 
     public void Roll()
     {
         int movement = Random.Range(1, 6);
         if (gm.AIturn)
         {
-            //display roll
-            AIStall();
-            Move(movement);
+            DisplayRoll(movement);
+            StartCoroutine(AIDelayToShowRoll());
         }
         else
         {
-            //display roll with confirm button
+            DisplayRoll(movement, true);
         }
+    }
+
+    public void Move()
+    {
+        Move(moves);
+    }
+
+    public void MoveCharacter(int index)
+    {
+        foreach (GameObject o in dirButtons) o.SetActive(false);
+        Vector3Int[] n = board.GetNeighbors(characters[gm.turnCount].currentTile);
+        MoveCharacter(n[index]);
     }
 
     void MoveCharacter(Vector3Int cell, bool initialMove = false)
@@ -54,6 +93,7 @@ public class TurnManager : MonoBehaviour
 
     public void Move(int spaces)
     {
+        Debug.Log(spaces);
         if(spaces >= 1)
         {
             if (gm.AIturn)
@@ -76,10 +116,12 @@ public class TurnManager : MonoBehaviour
                 {
                     MoveCharacter(n[valid[Random.Range(0, valid.Count)]]);
                 }
+                Move(spaces - 1);
                 //move characters[gm.turnCount].GameObject movement number of spaces
             }
             else
             {
+                foreach (GameObject o in dirButtons) o.SetActive(false);
                 //pick direction if nessicary
                 Vector3Int[] n = board.GetNeighbors(characters[gm.turnCount].currentTile);
                 int options = 0;
@@ -88,29 +130,37 @@ public class TurnManager : MonoBehaviour
                 {
                     if (!(n[i] == new Vector3Int(-99999, -99999) || n[i] == characters[gm.turnCount].lastTile))
                     {
+                        dirButtons[i].SetActive(true);
                         only = n[i];
                         options++;
                     }
                 }
-                if (options == 0) MoveCharacter(characters[gm.turnCount].lastTile);
-                else if (options == 1) MoveCharacter(only);
-                else
+                if (options == 0)
                 {
-                    //display options
+                    MoveCharacter(characters[gm.turnCount].lastTile);
+                    Move(spaces - 1);
+                }
+                else if (options == 1)
+                {
+                    MoveCharacter(only);
+                    Move(spaces - 1);
+                } else
+                {
+                    moves = spaces - 1;
                 }
                 //move characters[gm.turnCount].GameObject movement number of spaces
             }
-            Move(spaces - 1);
         }
         else
         {
+            foreach (GameObject o in dirButtons) o.SetActive(false);
             board.EndOnTile(characters[gm.turnCount].currentTile);
             //check tile type
             //resolve tile effect if any;
             gm.incrementTurn();
             if (!gm.AIturn)
             {
-                //display turn start UI
+                PromptRoll();
             }
             else
             {

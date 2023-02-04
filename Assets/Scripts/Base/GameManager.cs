@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
         {
             turnCount = 0;
         }
-        if(turnCount > playercount && turnCount < 3)
+        if(turnCount > playercount)
         {
             AIturn = true;
         }
