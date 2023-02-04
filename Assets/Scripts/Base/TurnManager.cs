@@ -24,6 +24,8 @@ public class TurnManager : MonoBehaviour
     int moves;
     bool needOptions;
 
+    List<Character> fightable = new List<Character>();
+
     private void Start()
     {
         instance = this;
@@ -109,15 +111,53 @@ public class TurnManager : MonoBehaviour
         return ret;
     }
 
-    public void MoveSelectionMade()
+    public void MoveSelectionMade() //Called by the move buttons, if there's nothing to interrupt the move in tile interactions, keep moving
     {
         bool interrupted = HandleTileInteractions();
         if (!interrupted) Move();
     }
 
+    public void AIDoneFighting()
+    {
+        Debug.Log("Fight over");
+        Battle.instance.finishEvent.RemoveListener(AIDoneFighting);
+        if (characters[gm.turnCount].stats.health <= 0)
+        {
+            Debug.Log(characters[gm.turnCount] + " Lost");
+            EndTurn();
+            return;
+        }
+        if (fightable.Count == 0) FinishInterrupt(true);
+        else AIChooseWhichToFight();
+    }
+
+    public void AIChooseWhichToFight()
+    {
+        int i = Random.Range(0, fightable.Count);
+        int fight = Random.Range(0, 2);
+        Character toFight = fightable[i];
+        Debug.Log(characters[gm.turnCount] +" can fight " + toFight);
+        fightable.RemoveAt(i);
+        if (fight == 1)
+        {
+            Debug.Log("Begin fight");
+            Battle.instance.BattleStart(characters[gm.turnCount], toFight);
+            Battle.instance.finishEvent.AddListener(AIDoneFighting);
+        } else
+        {
+            AIDoneFighting();
+        }
+    }
+
     public void Move()
     {
-
+        Debug.Log(characters[gm.turnCount] + " moving " + moves + " spaces with " + characters[gm.turnCount].stats.health + " health");
+        if (characters[gm.turnCount].stats.health <= 0)
+        {
+            EndTurn();
+            return;
+        }
+        Debug.Log("Player had enough health");
         foreach (GameObject o in dirButtons) o.SetActive(false);
         dirButtonContainer.SetActive(true);
         while (moves > 0)
@@ -145,7 +185,9 @@ public class TurnManager : MonoBehaviour
                 List<Character> occupying = OthersOccupyingTile(characters[gm.turnCount]);
                 if (occupying.Count > 0)
                 {
-                    //choose whether to fight occupying characters
+                    fightable = occupying;
+                    AIChooseWhichToFight();
+                    return;
                 }
                 bool interrupt = board.StepOnTile(characters[gm.turnCount].currentTile);
                 if (interrupt) return;
