@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Stats", menuName = "ScriptableObjects/Stats", order = 1)]
 public class Stats : ScriptableObject
 {
+    public Sprite sprite;
+
     public int hp;
     public int health;
     public int attack;
