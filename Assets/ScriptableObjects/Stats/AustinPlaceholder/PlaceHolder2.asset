@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cfeff42ca20444989eb47ab7b5de62, type: 3}
   m_Name: PlaceHolder2
   m_EditorClassIdentifier: 
+  title: MJ
   sprite: {fileID: 21300000, guid: 3e02216be3aa4b849b4e34eab43c41a9, type: 3}
-  hp: 5
-  health: 5
+  hp: 20
+  health: 20
   attack: 5
   defense: 5
   speed: 5
-  eveade: 5
+  evade: 3

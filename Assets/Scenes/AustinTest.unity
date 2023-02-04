@@ -3874,6 +3874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1299566559}
   - component: {fileID: 1299566558}
+  - component: {fileID: 1299566560}
   m_Layer: 0
   m_Name: Character1
   m_TagString: Untagged
@@ -3893,9 +3894,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d0fa8b6bd6cf44e93961fd9d6a2dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 5f98b2552d3b4fc4384dde03ab9adc51, type: 2}
+  stats: {fileID: 1299566560}
   currentTile: {x: 0, y: 0, z: 0}
   lastTile: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
+  inventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1299566559
 Transform:
   m_ObjectHideFlags: 0
@@ -3911,6 +3917,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1299566560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299566557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224633fc11a124e4498f119b64031956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: 5f98b2552d3b4fc4384dde03ab9adc51, type: 2}
+  hp: 0
+  health: 0
+  attack: 0
+  defense: 0
+  speed: 0
+  evade: 0
 --- !u!1 &1379666182
 GameObject:
   m_ObjectHideFlags: 0
@@ -3996,8 +4021,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 34
+  m_fontSizeBase: 34
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4880,6 +4905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1783483562}
   - component: {fileID: 1783483561}
+  - component: {fileID: 1783483563}
   m_Layer: 0
   m_Name: Character2
   m_TagString: Untagged
@@ -4899,9 +4925,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d0fa8b6bd6cf44e93961fd9d6a2dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: cab85293fdf61ae40b0f878a049761fa, type: 2}
+  stats: {fileID: 1783483563}
   currentTile: {x: 0, y: 0, z: 0}
   lastTile: {x: 0, y: 0, z: 0}
+  empty: {fileID: 0}
+  inventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &1783483562
 Transform:
   m_ObjectHideFlags: 0
@@ -4917,6 +4948,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1783483563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1783483560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224633fc11a124e4498f119b64031956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: cab85293fdf61ae40b0f878a049761fa, type: 2}
+  hp: 0
+  health: 0
+  attack: 0
+  defense: 0
+  speed: 0
+  evade: 0
 --- !u!1 &1824157360
 GameObject:
   m_ObjectHideFlags: 0

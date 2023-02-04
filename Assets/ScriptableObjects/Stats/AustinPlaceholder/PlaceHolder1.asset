@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cfeff42ca20444989eb47ab7b5de62, type: 3}
   m_Name: PlaceHolder1
   m_EditorClassIdentifier: 
+  title: Elvis
   sprite: {fileID: 21300000, guid: 88357642a6a6dad4782b0a5790c14922, type: 3}
-  hp: 5
-  health: 5
+  hp: 20
+  health: 20
   attack: 5
   defense: 5
   speed: 5
-  eveade: 5
+  evade: 3

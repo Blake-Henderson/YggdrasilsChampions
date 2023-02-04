@@ -20,9 +20,16 @@ public class Battle : MonoBehaviour
     private bool c1turn = true;
     private bool c2turn = false;
 
+    //This determines who has rolled for each individual player turn
+    private bool c1rolled = false;
+    private bool c2rolled = false;
+
     //this determines who rolled last True = character1 rolled last
     private bool lastRoll = false;
-    
+
+    //This tells us if damage has been resolved
+    private bool dmgResolve = false;
+
     //This determines turn order
     private int c1Initiative = 0;
     private int c2Initiative = 0;
@@ -143,25 +150,31 @@ public class Battle : MonoBehaviour
         //This exist until an animation can trigger the below code
         else if(!timer)
         {
+            //ensuring important bools are set
+            c1rolled = false;
+            c2rolled = false;
+            firstTurn = true;
             //Finds who had higher initiative
             if (c1Initiative > c2Initiative) 
             {
                 c1turn = true;
                 c2turn = false;
-                BUI.setBattleText("C1 will go first");
+                BUI.setBattleText(c1temp.stats.name + " will go first");
+                lastRoll = false;
                 bs = BattleState.ACTION;
             }
             else if(c1Initiative < c2Initiative)
             {
                 c1turn = false;
                 c2turn = true;
-                BUI.setBattleText("C2 will go first");
+                BUI.setBattleText(c2temp.stats.name + " will go first");
+                lastRoll = true;
                 bs = BattleState.ACTION;
             }
             else
             {
                 decidingTurn = true;
-                timer = false;
+                timer = true;
                 BUI.setC1Text(nothing);
                 BUI.setC2Text(nothing);
             }
@@ -179,12 +192,14 @@ public class Battle : MonoBehaviour
         else
         {
             actionRolls();
-            timer = true;
-            decidingTurn = true;
-            BUI.setBattleText("INITIATIVE SHAKEUP!");
-            StartCoroutine(timed());
-            if (!timer)
+            //ensures turn has ended before initiative shakeup
+            if (dmgResolve)
             {
+                timer = true;
+                decidingTurn = true;
+                dmgResolve = false;
+                firstTurn = true;
+                lastRoll = false;
                 bs = BattleState.RESOLUTION;
             }
         }
@@ -194,29 +209,286 @@ public class Battle : MonoBehaviour
     {
         if (c1turn)
         {
-            lastRoll = false;
             BUI.setC1Text("Roll to Attack! ");
             BUI.setC1Roll(true);
 
             if (lastRoll)
             {
-                BUI.setC1Text("Attack: " + c1atk);
+                timer = true;
+                //displays the attack total for character 1, prevents character 1 from rolling
                 BUI.setC1Roll(false);
-                BUI.setC2But(true);
-                BUI.setC2Text("Pick an option");
+                BUI.setC1Text("Attack: " + c1atk);
+                //This is where the if statement will go after picking
                 if (optionPicked)
                 {
-                    optionPicked = false;
                     BUI.setC2But(false);
                     BUI.setC2Roll(true);
                     BUI.setC2Text("ROLL!");
+                    BUI.setBattleText(nothing);
+                }
+                //This is where the if statement will go prior to picking defend or evade
+                else
+                {
+                    BUI.setC2But(true);
+                    BUI.setC2Text(nothing);
+                    BUI.setBattleText("Choose an option");
+                }
+
+            }
+            //both will be true when both of rolled
+            if(c1rolled && c2rolled)
+            {
+                //displays the attack total for character 1, prevents character 1 from rolling, prevents 2 from rolling
+                BUI.setC1Roll(false);
+                BUI.setC1Text("Attack: " + c1atk);
+                BUI.setC2Roll(false);
+                //if true defending calculation is used, if false we are evading
+                if (defEvd)
+                {
+                    int damage = c1atk - c2def;
+                    //ensures while defending you always take one damage at minimum
+                    if(damage < 1)
+                    {
+                        damage = 1;
+                    }
+
+                    BUI.setC2Text("Defense: " + c2def);
+                    BUI.setBattleText(c2temp.stats.name + " Takes " + damage + " Damage!");
+
+                    if (!timer)
+                    {
+                        //prevents multihit
+                        if (c1rolled && c2rolled)
+                        {
+                            c2temp.stats.takeDamage(damage);
+                        }
+                        c1rolled = false;
+                        c2rolled = false;
+
+                        //Sets healthbar
+                        BUI.updateHealth(c1temp,c2temp);
+
+                        Debug.Log("C2 health: " + c2temp.stats.health);
+                        if(c2temp.stats.health < 1)
+                        {
+                            BUI.setBattleText(c1temp.stats.name + " WINS");
+                            bs = BattleState.END;
+                        }
+                        else
+                        {
+                            c1turn = false;
+                            c2turn = true;
+                            
+                        }
+                        timer = true;
+                        dmgResolve = true;
+
+                    }
+                    else
+                    {
+                        StartCoroutine(timed());
+                    }
+                }
+                else
+                {
+                    int damage = c1atk;
+
+                    BUI.setC2Text("Evade: " + c2evd);
+                    if (c2evd > damage)
+                    {
+                        BUI.setBattleText("Dodged!");
+                    }
+                    else
+                    {
+                        BUI.setBattleText(c2temp.stats.name + " Takes " + damage + " Damage!");
+                    }
+
+                    if (!timer)
+                    {
+                        if (c1rolled && c2rolled && c2evd < damage)
+                        {
+                            c2temp.stats.takeDamage(damage);
+                        }
+                        c1rolled = false;
+                        c2rolled = false;
+
+                        //Sets healthbar
+                        BUI.updateHealth(c1temp, c2temp);
+
+                        Debug.Log("C2 health: " + c2temp.stats.health);
+
+                        if (c2temp.stats.health < 1)
+                        {
+                            BUI.setBattleText(c1temp.stats.name + " WINS");
+                            bs = BattleState.END;
+                        }
+                        else
+                        {
+                            c1turn = false;
+                            c2turn = true;
+                        }
+                        timer = true;
+                        dmgResolve = true;
+
+                    }
+                    else
+                    {
+                        StartCoroutine(timed());
+                    }
                 }
             }
+
+            //after dmage is resolved makes it no longer first turn, also ensures the last roll is correct
+            if (dmgResolve && firstTurn)
+            {
+                firstTurn = false;
+                dmgResolve = false;
+                lastRoll = true;
+            }
         }
+        //WHITESPACE
+        //
+        //This is the same battle stuff but for the second player
+        //
+        //
         else if (c2turn)
         {
-            lastRoll = true;
+            BUI.setC2Text("Roll to Attack! ");
+            BUI.setC2Roll(true);
 
+            if (!lastRoll)
+            {
+                timer = true;
+                //displays the attack total for character 2, prevents character 2 from rolling
+                BUI.setC2Roll(false);
+                BUI.setC2Text("Attack: " + c2atk);
+                //This is where the if statement will go after picking
+                if (optionPicked)
+                {
+                    BUI.setC1But(false);
+                    BUI.setC1Roll(true);
+                    BUI.setC1Text("ROLL!");
+                    BUI.setBattleText(nothing);
+                }
+                //This is where the if statement will go prior to picking defend or evade
+                else
+                {
+                    BUI.setC1But(true);
+                    BUI.setC1Text(nothing);
+                    BUI.setBattleText("Choose an option");
+                }
+
+            }
+            //both will be true when both of rolled
+            if (c1rolled && c2rolled)
+            {
+                //displays the attack total for character 2, prevents character 2 from rolling, prevents 1 from rolling
+                BUI.setC2Roll(false);
+                BUI.setC2Text("Attack: " + c2atk);
+                BUI.setC1Roll(false);
+                //if true defending calculation is used, if false we are evading
+                if (defEvd)
+                {
+                    int damage = c2atk - c1def;
+                    //ensures while defending you always take one damage at minimum
+                    if (damage < 1)
+                    {
+                        damage = 1;
+                    }
+
+                    BUI.setC1Text("Defense: " + c1def);
+                    BUI.setBattleText(c1temp.stats.name + " Takes " + damage + " Damage!");
+
+                    if (!timer)
+                    {
+                        //prevents multihit
+                        if (c1rolled && c2rolled)
+                        {
+                            c1temp.stats.takeDamage(damage);
+                        }
+                        c1rolled = false;
+                        c2rolled = false;
+
+                        //Sets healthbar
+                        BUI.updateHealth(c1temp, c2temp);
+
+                        Debug.Log("C1 health: " + c1temp.stats.health);
+
+                        if (c1temp.stats.health < 1)
+                        {
+                            BUI.setBattleText(c2temp.stats.name + " WINS");
+                            bs = BattleState.END;
+                        }
+                        else
+                        {
+                            c1turn = true;
+                            c2turn = false;
+                        }
+                        timer = true;
+                        dmgResolve = true;
+
+                    }
+                    else
+                    {
+                        StartCoroutine(timed());
+                    }
+                }
+                else
+                {
+                    int damage = c2atk;
+
+                    BUI.setC1Text("Evade: " + c1evd);
+                    if (c1evd > damage)
+                    {
+                        BUI.setBattleText("Dodged!");
+                    }
+                    else
+                    {
+                        BUI.setBattleText(c1temp.stats.name + " Takes " + damage + " Damage!");
+                    }
+
+                    if (!timer)
+                    {
+                        if (c1rolled && c2rolled && c1evd < damage)
+                        {
+                            c1temp.stats.takeDamage(damage);
+                        }
+                        c1rolled = false;
+                        c2rolled = false;
+
+                        //Sets healthbar
+                        BUI.updateHealth(c1temp, c2temp);
+
+                        Debug.Log("C1 health: " + c1temp.stats.health);
+
+                        if (c1temp.stats.health < 1)
+                        {
+                            BUI.setBattleText(c2temp.stats.name + " WINS");
+                            bs = BattleState.END;
+                        }
+                        else
+                        {
+                            c1turn = false;
+                            c2turn = true;
+                        }
+                        timer = true;
+                        dmgResolve = true;
+
+                    }
+                    else
+                    {
+                        StartCoroutine(timed());
+                    }
+                }
+            }
+
+            //after dmage is resolved makes it no longer first turn
+            if (dmgResolve && firstTurn)
+            {
+                firstTurn = false;
+                dmgResolve = false;
+                lastRoll = false;
+            }
         }
     }
 
@@ -233,12 +505,14 @@ public class Battle : MonoBehaviour
             {
                 c1Initiative = diceRoll + c1temp.stats.speed;
                 BUI.setC1Text("Initiative: " + c1Initiative);
+                timer = true;
             }
             else
             {
                 c2Initiative = diceRoll + c2temp.stats.speed;
                 BUI.setC2Text("Initiative: " + c2Initiative);
                 decidingTurn = false;
+                timer = true;
                 StartCoroutine(timed());
             }
         }
@@ -250,12 +524,16 @@ public class Battle : MonoBehaviour
                 c1atk = diceRoll + c1temp.stats.attack;
                 c1def = diceRoll + c1temp.stats.defense;
                 c1evd = diceRoll + c1temp.stats.evade;
+                c1rolled = true;
+                optionPicked = false;
             }
             else
             {
                 c2atk = diceRoll + c2temp.stats.attack;
                 c2def = diceRoll + c2temp.stats.defense;
                 c2evd = diceRoll + c2temp.stats.evade;
+                c2rolled = true;
+                optionPicked = false;
             }
         }
         lastRoll = !lastRoll;
