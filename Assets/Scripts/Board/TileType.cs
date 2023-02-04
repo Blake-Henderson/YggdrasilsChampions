@@ -8,6 +8,6 @@ public class TileType : ScriptableObject
 {
     public TileBase[] tiles;
 
-    public void OnStep() { } 
-    public void OnEnd() { }
+    public virtual void OnStep() { } 
+    public virtual void OnEnd() { }
 }
