@@ -156,9 +156,11 @@ MonoBehaviour:
   hp: 0
   health: 0
   attack: 0
+  tempAttack: 0
   defense: 0
   speed: 0
   evade: 0
+  canRun: 0
 --- !u!4 &27927023
 Transform:
   m_ObjectHideFlags: 0
@@ -876,6 +878,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8742306805945843682, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
+      propertyPath: empty
+      value: 
+      objectReference: {fileID: 11400000, guid: 3445a9b15b5107545bcc5b866b559579, type: 2}
     - target: {fileID: 8742306805945843683, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: m_Name
       value: Player1
@@ -1812,6 +1818,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1280447161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8718262637480956597, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
+  m_PrefabInstance: {fileID: 1923327426}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1311106197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1931,6 +1942,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8742306805945843682, guid: 248623bb9fa434143ad008bdddce5d4e, type: 3}
+      propertyPath: empty
+      value: 
+      objectReference: {fileID: 11400000, guid: 3445a9b15b5107545bcc5b866b559579, type: 2}
     - target: {fileID: 8742306805945843683, guid: 248623bb9fa434143ad008bdddce5d4e, type: 3}
       propertyPath: m_Name
       value: Player3
@@ -2092,6 +2107,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8742306805945843682, guid: 63a11266f177f554cad96bbd74f449e9, type: 3}
+      propertyPath: empty
+      value: 
+      objectReference: {fileID: 11400000, guid: 3445a9b15b5107545bcc5b866b559579, type: 2}
     - target: {fileID: 8742306805945843683, guid: 63a11266f177f554cad96bbd74f449e9, type: 3}
       propertyPath: m_Name
       value: Player2
@@ -2267,6 +2286,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8742306805945843682, guid: 033c39862d39f26469b5d21b0ddbf78d, type: 3}
+      propertyPath: empty
+      value: 
+      objectReference: {fileID: 11400000, guid: 3445a9b15b5107545bcc5b866b559579, type: 2}
+    - target: {fileID: 8742306805945843682, guid: 033c39862d39f26469b5d21b0ddbf78d, type: 3}
+      propertyPath: inventory.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742306805945843682, guid: 033c39862d39f26469b5d21b0ddbf78d, type: 3}
+      propertyPath: inventory.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3445a9b15b5107545bcc5b866b559579, type: 2}
     - target: {fileID: 8742306805945843683, guid: 033c39862d39f26469b5d21b0ddbf78d, type: 3}
       propertyPath: m_Name
       value: Player4
@@ -2322,9 +2353,11 @@ MonoBehaviour:
   hp: 0
   health: 0
   attack: 0
+  tempAttack: 0
   defense: 0
   speed: 0
   evade: 0
+  canRun: 0
 --- !u!114 &1877000929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2372,6 +2405,14 @@ PrefabInstance:
     - target: {fileID: 533948856328619373, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 812738711853622135, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1888027619933219896, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1977876426955874543, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2473,6 +2514,10 @@ PrefabInstance:
       propertyPath: manager
       value: 
       objectReference: {fileID: 474430503}
+    - target: {fileID: 6154069507706232896, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
+      propertyPath: InvPanel
+      value: 
+      objectReference: {fileID: 1280447161}
     - target: {fileID: 8718262635979410505, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -9,6 +9,7 @@ public class BattleUI : MonoBehaviour
     //these are the panels needed to do battle
     [SerializeField] GameObject BattlePanel;
     [SerializeField] GameObject CutInPanel;
+    public GameObject InvPanel;
 
     //These are the images for the cut-in animation
     [SerializeField] Image C1Bust;
@@ -82,14 +83,14 @@ public class BattleUI : MonoBehaviour
     {
         //Sets all of character 1's stat values
         C1HealthText.text = c1.stats.health + " / " + c1.stats.hp;
-        C1AtkText.text = "ATK \n" + c1.stats.attack;
+        C1AtkText.text = "ATK \n" + c1.stats.tempAttack;
         C1DefText.text = "DEF \n" + c1.stats.defense;
         C1SpdText.text = "SPD \n" + c1.stats.speed;
         C1EvdText.text = "EVD \n" + c1.stats.evade;
 
         //Sets all of character 2's stat values
         C2HealthText.text = c2.stats.health + " / " + c2.stats.hp;
-        C2AtkText.text = "ATK \n" + c2.stats.attack;
+        C2AtkText.text = "ATK \n" + c2.stats.tempAttack;
         C2DefText.text = "DEF \n" + c2.stats.defense;
         C2SpdText.text = "SPD \n" + c2.stats.speed;
         C2EvdText.text = "EVD \n" + c2.stats.evade;
@@ -148,5 +149,33 @@ public class BattleUI : MonoBehaviour
     {
         DiceD6.gameObject.SetActive(b);
         DiceD6.sprite = DiceRolls[i - 1];
+    }
+
+    public void setInv(bool b, Character c)
+    {
+
+
+        if (b)
+        {
+            InvPanel.GetComponent<Inventory>().inBattle = true;
+            InvPanel.GetComponent<Inventory>().pullUpInventory(c);
+        }
+        else
+        {
+            InvPanel.GetComponent<Inventory>().inBattle = false;
+            InvPanel.GetComponent<Inventory>().inventoryPanel.SetActive(b);
+        }
+    }
+
+    public void setInv(bool b)
+    {
+        if (b)
+        {
+            InvPanel.GetComponent<Inventory>().inBattle = true;
+        }
+        else
+        {
+            InvPanel.GetComponent<Inventory>().inBattle = false;
+        }
     }
 }

@@ -8,15 +8,19 @@ public class StatManager : MonoBehaviour
     public int hp;
     public int health;
     public int attack;
+    public int tempAttack;
     public int defense;
     public int speed;
     public int evade;
+
+    public bool canRun = false;
 
     private void Start()
     {
         hp = baseStats.hp;
         health = hp;
         attack = baseStats.attack;
+        tempAttack = attack;
         defense = baseStats.defense;
         speed = baseStats.speed;
         evade = baseStats.evade;

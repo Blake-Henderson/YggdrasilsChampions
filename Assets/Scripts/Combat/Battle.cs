@@ -24,12 +24,20 @@ public class Battle : MonoBehaviour
     private bool c1turn = true;
     private bool c2turn = false;
 
+    //this is for item stuffs
+    public bool notEmpty = false;
+    public bool loop1 = false;
+    public bool loop2 = false;
+
     //This determines who has rolled for each individual player turn
     private bool c1rolled = false;
     private bool c2rolled = false;
 
     //this determines who rolled last True = character1 rolled last
     private bool lastRoll = false;
+
+    //This is useful
+    public bool invOpen = false;
 
     //This tells us if damage has been resolved
     private bool dmgResolve = false;
@@ -56,8 +64,8 @@ public class Battle : MonoBehaviour
     private BattleUI BUI;
 
     //Copied from battlestart
-    private Character c1temp;
-    private Character c2temp;
+    public Character c1temp;
+    public Character c2temp;
 
     //Defend is when this is true, evade is when this is false
     public bool defEvd = false;
@@ -67,6 +75,7 @@ public class Battle : MonoBehaviour
     public enum BattleState
     {
         OFF,
+        ITEM,
         START,
         ACTION,
         RESOLUTION,
@@ -84,16 +93,140 @@ public class Battle : MonoBehaviour
     //This will start the battle and play the animations for the characters in question
     public void BattleStart(Character c1, Character c2)
     {
+        //Grabs a reference to both characters and resets their temporary attack
         c1temp = c1;
         c2temp = c2;
-        BUI = GetComponent<BattleUI>();
-        bs = BattleState.START;
-        BUI.setSprites(c1, c2);
-        BUI.setStats(c1, c2);
-        BUI.updateHealth(c1, c2);
-        BUI.cutinPan(true);
-
+        c1temp.stats.tempAttack = c1temp.stats.attack;
+        c2temp.stats.tempAttack = c2temp.stats.attack;
+        bs = BattleState.ITEM;
     }
+
+    //This will happen before cut-ins and 
+    public void itemUse()
+    {
+        //Iterates through loop
+        if (!loop1 && !c1temp.AIControled)
+        {
+            Debug.Log("HUMAN CONTROL FOR SOME REASON");
+            for (int i = 0; i < c1temp.inventory.Length; i++)
+            {
+                if (c1temp.inventory[i].type != "Empty")
+                {
+                    notEmpty = true;
+                }
+            }
+            loop1 = true;
+        }
+        else if(!loop1 && c1temp.AIControled)
+        {
+            Debug.Log("C1 AI ENTERANCE");
+            for (int i = 0; i < c1temp.inventory.Length; i++)
+            {
+                if (c1temp.inventory[i].type != "Empty")
+                {
+                    Debug.Log("AI C1 HAS A JAR OF DIRT");
+                    BUI.setInv(true);
+                    notEmpty = true;
+                    loop1 = true;
+                    BUI.InvPanel.GetComponent<Inventory>().setChar(c1temp);
+                    BUI.InvPanel.GetComponent<Inventory>().setSlot(i);
+                    BUI.InvPanel.GetComponent<Inventory>().useItem();
+
+                    i += 100;
+                }
+            }
+            loop1 = true;
+            notEmpty = false;
+        }
+
+        if(notEmpty && loop1 && !invOpen)
+        {
+            Debug.Log("INSIDE C1 INVENTORY");
+            invOpen = true;
+            BUI.setInv(true, c1temp);
+        }
+
+        if(!loop2 && !c2temp.AIControled && !invOpen)
+        {
+            Debug.Log("HUMAN CONTROL FOR SOME REASON");
+            invOpen = false;
+            for (int i = 0; i < c2temp.inventory.Length; i++)
+            {
+                if (c2temp.inventory[i].type != "Empty")
+                {
+                    notEmpty = true;
+                }
+            }
+            loop2 = true;
+        }
+        else if (!loop2 && c2temp.AIControled && !invOpen)
+        {
+            Debug.Log("C2 AI ENTERANCE");
+            for (int i = 0; i < c2temp.inventory.Length; i++)
+            {
+                if (c2temp.inventory[i].type != "Empty")
+                {
+                    Debug.Log("AI C2 HAS A JAR OF DIRT");
+                    BUI.setInv(true);
+                    notEmpty = true;
+                    loop2 = true;
+                    BUI.InvPanel.GetComponent<Inventory>().setChar(c2temp);
+                    BUI.InvPanel.GetComponent<Inventory>().setSlot(i);
+                    BUI.InvPanel.GetComponent<Inventory>().useItem();
+
+                    i += 100;
+                }
+            }
+            notEmpty = false;
+            loop2 = true;
+            Debug.Log("C1 AI EXIT");
+        }
+
+
+        //Debug.Log("LOOP 1 STATUS" + loop1);
+        //Debug.Log("LOOP 2 STATUS" + loop2);
+        //Debug.Log("NOTEMPTY STATUS" + notEmpty);
+        if (notEmpty && loop2 && !invOpen)
+        {
+            Debug.Log("INSIDE C2 INVENTORY");
+            invOpen = true;
+            BUI.setInv(true, c2temp);
+        }
+
+        if (loop1 && loop2 && !notEmpty)
+        {
+            //Instantly ends the battle according to who can run
+            if(c1temp.stats.canRun || c2temp.stats.canRun)
+            {
+                if (c1temp.stats.canRun)
+                {
+                    c1temp.stats.canRun = false;
+                }
+
+                if (c2temp.stats.canRun)
+                {
+                    c2temp.stats.canRun = false;
+                }
+
+                loop1 = false;
+                loop2 = false;
+                bs = BattleState.END;
+            }
+            //progresses with battle as normal
+            else
+            {
+                loop1 = false;
+                loop2 = false;
+                BUI = GetComponent<BattleUI>();
+                BUI.setSprites(c1temp, c2temp);
+                BUI.setStats(c1temp, c2temp);
+                BUI.updateHealth(c1temp, c2temp);
+                bs = BattleState.START;
+                BUI.cutinPan(true);
+            }
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -102,6 +235,11 @@ public class Battle : MonoBehaviour
         //Changes the battle based upon battle state
         switch (bs)
         {
+            case BattleState.ITEM:
+                itemUse();
+                break;
+
+
             case BattleState.ACTION:
                 action();
                 break;
@@ -140,6 +278,7 @@ public class Battle : MonoBehaviour
             BUI.setC2But(false);
             BUI.setC2Roll(false);
             BUI.setC1Roll(false);
+            BUI.setInv(false);
 
             timer = true;
             firstTurn = true;
@@ -150,6 +289,9 @@ public class Battle : MonoBehaviour
             c2rolled = false;
             lastRoll = false;
             dmgResolve = false;
+
+            loop1 = false;
+            loop2 = false;
 
             BUI.battlePan(false);
             BUI.cutinPan(false);
@@ -565,6 +707,7 @@ public class Battle : MonoBehaviour
                 {
                     Debug.Log("In WIN");
                     BUI.setBattleText(c1temp.stats.baseStats.title + " WINS");
+                    c1temp.stats.raiseStat(Random.Range(0, 5), 1);
                     timer = true;
                     bs = BattleState.END;
                 }
@@ -619,6 +762,7 @@ public class Battle : MonoBehaviour
                 {
                     Debug.Log("In WIN");
                     BUI.setBattleText(c1temp.stats.baseStats.title + " WINS");
+                    c1temp.stats.raiseStat(Random.Range(0, 5), 1);
                     timer = true;
                     bs = BattleState.END;
                 }
@@ -672,6 +816,7 @@ public class Battle : MonoBehaviour
                 {
                     Debug.Log("In WIN");
                     BUI.setBattleText(c2temp.stats.baseStats.title + " WINS");
+                    c2temp.stats.raiseStat(Random.Range(0, 5), 1);
                     timer = true;
                     bs = BattleState.END;
                 }
@@ -721,6 +866,7 @@ public class Battle : MonoBehaviour
                 {
                     Debug.Log("In WIN");
                     BUI.setBattleText(c2temp.stats.baseStats.title + " WINS");
+                    c2temp.stats.raiseStat(Random.Range(0, 5), 1);
                     timer = true;
                     bs = BattleState.END;
                 }
@@ -769,7 +915,7 @@ public class Battle : MonoBehaviour
         {
             if (!lastRoll)
             {
-                c1atk = diceRoll + c1temp.stats.attack;
+                c1atk = diceRoll + c1temp.stats.tempAttack;
                 c1def = diceRoll + c1temp.stats.defense;
                 c1evd = diceRoll + c1temp.stats.evade;
                 c1rolled = true;
@@ -777,7 +923,7 @@ public class Battle : MonoBehaviour
             }
             else
             {
-                c2atk = diceRoll + c2temp.stats.attack;
+                c2atk = diceRoll + c2temp.stats.tempAttack;
                 c2def = diceRoll + c2temp.stats.defense;
                 c2evd = diceRoll + c2temp.stats.evade;
                 c2rolled = true;
