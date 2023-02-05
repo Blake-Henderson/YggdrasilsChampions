@@ -468,8 +468,8 @@ public class Battle : MonoBehaviour
                 if (!lastRoll)
                 {
                     timer = true;
-                    BUI.setC1Text("Attack: " + c1atk);
-                    if (optionPicked && !c2temp.AIControled)
+                    BUI.setC2Text("Attack: " + c2atk);
+                    if (optionPicked && !c1temp.AIControled)
                     {
                         BUI.setC1But(false);
                         BUI.setC1Roll(true);
@@ -503,15 +503,14 @@ public class Battle : MonoBehaviour
                         }
                         optionPicked = true;
                     }
+                    //This is where the if statement will go prior to picking defend or evade
+                    else
+                    {
+                        BUI.setC1But(true);
+                        BUI.setC1Text(nothing);
+                        BUI.setBattleText("Choose an option");
+                    }
                 }
-                //This is where the if statement will go prior to picking defend or evade
-                else
-                {
-                    BUI.setC1But(true);
-                    BUI.setC1Text(nothing);
-                    BUI.setBattleText("Choose an option");
-                }
-
                 if (c1rolled && c2rolled)
                 {
                     defenseCalcs2();

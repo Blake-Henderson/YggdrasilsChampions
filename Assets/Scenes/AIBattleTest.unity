@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 75615170962663227, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 812738711853622135, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5088633378614139224, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
       propertyPath: manager
       value: 
@@ -1285,7 +1293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: defense
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: baseStats
@@ -1374,7 +1382,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: defense
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: baseStats
@@ -1426,7 +1434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8742306805945843682, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: AIControled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8742306805945843683, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: m_Name
@@ -1523,7 +1531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1479912222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2472,7 +2480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2092750888
 MonoBehaviour:
   m_ObjectHideFlags: 0
