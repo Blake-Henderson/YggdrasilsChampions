@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
 
     private void Start()
     {
+        gm = GameManager.instance;
         back();
     }
 }
