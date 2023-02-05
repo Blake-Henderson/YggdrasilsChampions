@@ -13,7 +13,7 @@ public class OccupiedTileSelect : MonoBehaviour
 
     public void DisplayOptions()
     {
-        if (toFight.Count == 0)
+        if (toFight.Count == 0 || manager.characters[manager.gm.turnCount].stats.health <= 0)
         {
             EndDisplay();
             return;
