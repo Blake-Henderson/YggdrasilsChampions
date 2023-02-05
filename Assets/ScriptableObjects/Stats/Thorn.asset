@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42cfeff42ca20444989eb47ab7b5de62, type: 3}
-  m_Name: EnemyOne
+  m_Name: Thorn
   m_EditorClassIdentifier: 
+  title: 
   sprite: {fileID: 0}
-  hp: 5
-  health: 5
-  attack: 3
-  defense: 2
-  speed: 5
-  evade: 0
+  hp: 10
+  health: 10
+  attack: 2
+  defense: 5
+  speed: 2
+  evade: 2
