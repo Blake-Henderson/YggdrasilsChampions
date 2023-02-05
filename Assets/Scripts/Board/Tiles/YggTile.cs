@@ -9,6 +9,7 @@ public class YggTile : TileType
 
     public override bool OnStep()
     {
+        PlayerInfoUI.instance.gameObject.SetActive(false);
         if (Yggdrasil == null) Yggdrasil = GetYggdrasil.instance.character;
         Battle.instance.BattleStart(TurnManager.instance.characters[TurnManager.instance.gm.turnCount], Yggdrasil);
         Battle.instance.finishEvent.AddListener(FightComplete);
@@ -19,6 +20,10 @@ public class YggTile : TileType
 
         Battle.instance.finishEvent.RemoveListener(FightComplete);
         if (Yggdrasil.stats.health <= 0) WinText.instance.Win();
-        else TurnManager.instance.EndTurn();
+        else
+        {
+            PlayerInfoUI.instance.gameObject.SetActive(true);
+            TurnManager.instance.EndTurn();
+        }
     }
 }
