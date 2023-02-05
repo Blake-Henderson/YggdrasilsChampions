@@ -267,6 +267,7 @@ public class TurnManager : MonoBehaviour
 
     public bool HandleTileInteractions()
     {
+        foreach (GameObject o in dirButtons) o.SetActive(false);
         List<Character> occupying = OthersOccupyingTile(characters[gm.turnCount]);
         if (occupying.Count > 0)
         {
