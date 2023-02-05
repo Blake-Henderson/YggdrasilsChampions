@@ -22,6 +22,8 @@ public class PlayerInfoUI : MonoBehaviour
         for (int i = 0; i < 4; ++i)
         {
             infos[i].UpdateDisplay(TurnManager.instance.characters[i].stats);
+            if (i == TurnManager.instance.gm.turnCount) infos[i].GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 320f);
+            else { infos[i].GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 160f); }
         }
 
     }
