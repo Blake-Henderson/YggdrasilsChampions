@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: GiveBribeBag
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 52b2973e8c652464eb10c5e13a748718, type: 2}
+  prefab: {fileID: 6670772925765273670, guid: dcf6170d34cccae469f6dbaedc2f4a22, type: 3}
+  tmp: {fileID: 0}
