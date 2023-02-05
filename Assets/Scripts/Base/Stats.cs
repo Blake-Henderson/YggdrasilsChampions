@@ -7,7 +7,9 @@ using UnityEngine;
 public class Stats : ScriptableObject
 {
     public string title;
-    public Sprite sprite;
+    public Sprite Bustsprite;
+    public Sprite Portsprite;
+    public Sprite Batsprite;
 
     public int hp;
     public int health;

@@ -68,14 +68,14 @@ public class BattleUI : MonoBehaviour
     public void setSprites(Character c1, Character c2)
     {
         //Sets all of Character 1's sprites
-        C1Bust.sprite = c1.stats.baseStats.sprite;
-        C1Battle.sprite = c1.stats.baseStats.sprite;
-        C1Port.sprite = c1.stats.baseStats.sprite;
+        C1Bust.sprite = c1.stats.baseStats.Bustsprite;
+        C1Battle.sprite = c1.stats.baseStats.Batsprite;
+        C1Port.sprite = c1.stats.baseStats.Portsprite;
 
         //Sets all of Character 2's sprites
-        C2Bust.sprite = c2.stats.baseStats.sprite;
-        C2Battle.sprite = c2.stats.baseStats.sprite;
-        C2Port.sprite = c2.stats.baseStats.sprite;
+        C2Bust.sprite = c2.stats.baseStats.Bustsprite;
+        C2Battle.sprite = c2.stats.baseStats.Batsprite;
+        C2Port.sprite = c2.stats.baseStats.Portsprite;
     }
 
     //This function sets all stat values
