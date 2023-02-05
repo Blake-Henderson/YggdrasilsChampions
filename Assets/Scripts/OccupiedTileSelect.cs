@@ -13,9 +13,8 @@ public class OccupiedTileSelect : MonoBehaviour
 
     public void DisplayOptions()
     {
-        if (toFight.Count == 0)
+        if (toFight.Count == 0 || manager.characters[manager.gm.turnCount].stats.health <= 0)
         {
-            Debug.Log("end");
             EndDisplay();
             return;
         }
@@ -30,7 +29,7 @@ public class OccupiedTileSelect : MonoBehaviour
 
     public void Fight(int i)
     {
-        Debug.Log("Fighting " + toFight[i].name);
+        PlayerInfoUI.instance.gameObject.SetActive(false);
         Battle.instance.finishEvent.AddListener(FightComplete);
         Battle.instance.BattleStart(manager.characters[manager.gm.turnCount], toFight[i]);
         toFight.RemoveAt(i);
@@ -39,6 +38,7 @@ public class OccupiedTileSelect : MonoBehaviour
 
     public void FightComplete()
     {
+        PlayerInfoUI.instance.gameObject.SetActive(true);
         Battle.instance.finishEvent.RemoveListener(FightComplete);
         container.SetActive(true);
         DisplayOptions();
