@@ -216,7 +216,7 @@ public class Battle : MonoBehaviour
             {
                 c1turn = true;
                 c2turn = false;
-                BUI.setBattleText(c1temp.stats.name + " will go first");
+                BUI.setBattleText(c1temp.stats.baseStats.title + " will go first");
                 lastRoll = false;
                 bs = BattleState.ACTION;
             }
@@ -224,7 +224,7 @@ public class Battle : MonoBehaviour
             {
                 c1turn = false;
                 c2turn = true;
-                BUI.setBattleText(c2temp.stats.name + " will go first");
+                BUI.setBattleText(c2temp.stats.baseStats.title + " will go first");
                 lastRoll = true;
                 bs = BattleState.ACTION;
             }
@@ -548,7 +548,7 @@ public class Battle : MonoBehaviour
             }
 
             BUI.setC2Text("Defense: " + c2def);
-            BUI.setBattleText(c2temp.stats.name + " Takes " + damage + " Damage!");
+            BUI.setBattleText(c2temp.stats.baseStats.title + " Takes " + damage + " Damage!");
 
             if (!timer)
             {
@@ -565,7 +565,7 @@ public class Battle : MonoBehaviour
                 if (c2temp.stats.health < 1)
                 {
                     Debug.Log("In WIN");
-                    BUI.setBattleText(c1temp.stats.name + " WINS");
+                    BUI.setBattleText(c1temp.stats.baseStats.title + " WINS");
                     timer = true;
                     bs = BattleState.END;
                 }
@@ -599,7 +599,7 @@ public class Battle : MonoBehaviour
             }
             else
             {
-                BUI.setBattleText(c2temp.stats.name + " Takes " + damage + " Damage!");
+                BUI.setBattleText(c2temp.stats.baseStats.title + " Takes " + damage + " Damage!");
             }
 
             if (!timer)
@@ -619,7 +619,7 @@ public class Battle : MonoBehaviour
                 if (c2temp.stats.health < 1)
                 {
                     Debug.Log("In WIN");
-                    BUI.setBattleText(c1temp.stats.name + " WINS");
+                    BUI.setBattleText(c1temp.stats.baseStats.title + " WINS");
                     timer = true;
                     bs = BattleState.END;
                 }
@@ -656,7 +656,7 @@ public class Battle : MonoBehaviour
             }
 
             BUI.setC1Text("Defense: " + c1def);
-            BUI.setBattleText(c1temp.stats.name + " Takes " + damage + " Damage!");
+            BUI.setBattleText(c1temp.stats.baseStats.title + " Takes " + damage + " Damage!");
 
             if (!timer)
             {
@@ -672,7 +672,7 @@ public class Battle : MonoBehaviour
                 if (c1temp.stats.health < 1)
                 {
                     Debug.Log("In WIN");
-                    BUI.setBattleText(c2temp.stats.name + " WINS");
+                    BUI.setBattleText(c2temp.stats.baseStats.title + " WINS");
                     timer = true;
                     bs = BattleState.END;
                 }
@@ -701,7 +701,7 @@ public class Battle : MonoBehaviour
             }
             else
             {
-                BUI.setBattleText(c1temp.stats.name + " Takes " + damage + " Damage!");
+                BUI.setBattleText(c1temp.stats.baseStats.title + " Takes " + damage + " Damage!");
             }
 
             if (!timer)
@@ -721,7 +721,7 @@ public class Battle : MonoBehaviour
                 if (c1temp.stats.health < 1)
                 {
                     Debug.Log("In WIN");
-                    BUI.setBattleText(c2temp.stats.name + " WINS");
+                    BUI.setBattleText(c2temp.stats.baseStats.title + " WINS");
                     timer = true;
                     bs = BattleState.END;
                 }
