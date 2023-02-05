@@ -9,7 +9,6 @@ public class YggTile : TileType
 
     public override bool OnStep()
     {
-        Debug.Log("Yggdrasil tile stepped on");
         if (Yggdrasil == null) Yggdrasil = GetYggdrasil.instance.character;
         Battle.instance.BattleStart(TurnManager.instance.characters[TurnManager.instance.gm.turnCount], Yggdrasil);
         Battle.instance.finishEvent.AddListener(FightComplete);

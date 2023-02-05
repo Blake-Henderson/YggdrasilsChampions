@@ -15,7 +15,6 @@ public class OccupiedTileSelect : MonoBehaviour
     {
         if (toFight.Count == 0)
         {
-            Debug.Log("end");
             EndDisplay();
             return;
         }
@@ -30,7 +29,6 @@ public class OccupiedTileSelect : MonoBehaviour
 
     public void Fight(int i)
     {
-        Debug.Log("Fighting " + toFight[i].name);
         Battle.instance.finishEvent.AddListener(FightComplete);
         Battle.instance.BattleStart(manager.characters[manager.gm.turnCount], toFight[i]);
         toFight.RemoveAt(i);

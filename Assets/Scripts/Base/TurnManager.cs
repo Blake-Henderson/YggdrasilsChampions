@@ -119,11 +119,9 @@ public class TurnManager : MonoBehaviour
 
     public void AIDoneFighting()
     {
-        Debug.Log("Fight over");
         Battle.instance.finishEvent.RemoveListener(AIDoneFighting);
         if (characters[gm.turnCount].stats.health <= 0)
         {
-            Debug.Log(characters[gm.turnCount] + " Lost");
             EndTurn();
             return;
         }
@@ -136,11 +134,9 @@ public class TurnManager : MonoBehaviour
         int i = Random.Range(0, fightable.Count);
         int fight = Random.Range(0, 2);
         Character toFight = fightable[i];
-        Debug.Log(characters[gm.turnCount] +" can fight " + toFight);
         fightable.RemoveAt(i);
         if (fight == 1)
         {
-            Debug.Log("Begin fight");
             Battle.instance.BattleStart(characters[gm.turnCount], toFight);
             Battle.instance.finishEvent.AddListener(AIDoneFighting);
         } else
@@ -151,13 +147,11 @@ public class TurnManager : MonoBehaviour
 
     public void Move()
     {
-        Debug.Log(characters[gm.turnCount] + " moving " + moves + " spaces with " + characters[gm.turnCount].stats.health + " health");
         if (characters[gm.turnCount].stats.health <= 0)
         {
             EndTurn();
             return;
         }
-        Debug.Log("Player had enough health");
         foreach (GameObject o in dirButtons) o.SetActive(false);
         dirButtonContainer.SetActive(true);
         while (moves > 0)
