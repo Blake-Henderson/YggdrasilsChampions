@@ -29,6 +29,7 @@ public class TurnManager : MonoBehaviour
     private void Start()
     {
         instance = this;
+        gm = GameManager.instance;
         foreach (Character c in characters) //place initial character
         {
             c.lastTile = c.currentTile;

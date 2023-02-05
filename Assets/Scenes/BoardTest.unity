@@ -783,7 +783,7 @@ PrefabInstance:
     - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: baseStats
       value: 
-      objectReference: {fileID: 11400000, guid: a3aa5983168c8da4a93a47c2e2e75670, type: 2}
+      objectReference: {fileID: 11400000, guid: 75b651452b772b04cb40b10edf3fdd81, type: 2}
     - target: {fileID: 8742306805945843681, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -1704,6 +1704,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
+      propertyPath: baseStats
+      value: 
+      objectReference: {fileID: 11400000, guid: b159ab9fb2330c94992bfefdf20466f2, type: 2}
     - target: {fileID: 8742306805945843681, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -1876,6 +1880,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4846af08f2df96e4d8ba93a25055cf7d, type: 2}
   - {fileID: 11400000, guid: a46a280a58973e9438becf727845c7dd, type: 2}
   - {fileID: 11400000, guid: 68dc9ad5bd7110043ae552dc44c69a0d, type: 2}
+  allTiles: []
 --- !u!1001 &1392208346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1883,6 +1888,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
+      propertyPath: baseStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 72d03ae2a48a4904493b71e3894d110c, type: 2}
     - target: {fileID: 8742306805945843681, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2066,6 +2075,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
+      propertyPath: baseStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 622ac824914412b49bbbaafa28a4cec0, type: 2}
     - target: {fileID: 8742306805945843681, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: m_RootOrder
       value: 9

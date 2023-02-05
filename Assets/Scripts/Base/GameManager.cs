@@ -7,13 +7,18 @@ public class GameManager : MonoBehaviour
     public int playercount;
     public int turnCount = 0;
     public bool AIturn;
-    GameManager instance;
+    public static GameManager instance;
 
     private void Start()
     {
         if(instance == null)
         {
+            DontDestroyOnLoad(gameObject);
             instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
     /// <summary>

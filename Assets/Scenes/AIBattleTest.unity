@@ -1298,7 +1298,7 @@ PrefabInstance:
     - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: baseStats
       value: 
-      objectReference: {fileID: 11400000, guid: b159ab9fb2330c94992bfefdf20466f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 5dd9e2ac98eb6b6418fe89cd1db5ca1f, type: 2}
     - target: {fileID: 8742306805945843681, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -1387,7 +1387,7 @@ PrefabInstance:
     - target: {fileID: 8742306805945843680, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: baseStats
       value: 
-      objectReference: {fileID: 11400000, guid: 72d03ae2a48a4904493b71e3894d110c, type: 2}
+      objectReference: {fileID: 11400000, guid: ef3bbb9a39ba56d4a9edcca0064ef530, type: 2}
     - target: {fileID: 8742306805945843681, guid: 8f32345e44783b242b357dedaa8171a0, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -2498,6 +2498,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cb167bad6af368f44a8047355ad50215, type: 2}
   - {fileID: 11400000, guid: 4846af08f2df96e4d8ba93a25055cf7d, type: 2}
   - {fileID: 11400000, guid: a46a280a58973e9438becf727845c7dd, type: 2}
+  allTiles: []
 --- !u!4 &2092750889
 Transform:
   m_ObjectHideFlags: 0

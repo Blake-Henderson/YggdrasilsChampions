@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Thorn
   m_EditorClassIdentifier: 
   title: 
-  sprite: {fileID: 0}
-  hp: 10
-  health: 10
+  sprite: {fileID: 21300000, guid: 3d3658cbf70229343b8e9dcac3b50def, type: 3}
+  hp: 5
+  health: 5
   attack: 2
   defense: 5
   speed: 2
-  evade: 2
+  evade: 4
