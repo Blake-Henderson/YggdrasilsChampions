@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class TurnManager : MonoBehaviour
 {
@@ -16,8 +17,10 @@ public class TurnManager : MonoBehaviour
     public GameObject[] dirButtons = new GameObject[4];
     public GameObject dirButtonContainer;
     public GameObject rollButton;
-    public GameObject results, resultsConfirm;
-    public TextMeshProUGUI resultsText;
+    public GameObject resultsConfirm;
+    public GameObject results;
+    public Image rollResult;
+    public Sprite[] faces;
 
     public OccupiedTileSelect occupiedCanvas;
 
@@ -68,7 +71,7 @@ public class TurnManager : MonoBehaviour
     void DisplayRoll(int result, bool confirmButton = false)
     {
         results.SetActive(true);
-        resultsText.text = result.ToString();
+        rollResult.sprite = faces[result - 1];
         moves = result;
         resultsConfirm.SetActive(confirmButton);
     }
