@@ -30,6 +30,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 353285355066215421}
+  - {fileID: 3511203737914461266}
+  - {fileID: 3056265988980827173}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -55,8 +57,9 @@ GameObject:
   m_Component:
   - component: {fileID: 353285355066215421}
   - component: {fileID: 353285355066215420}
+  - component: {fileID: 6050157124891759648}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,8 +76,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 353285355908525551}
+  m_Children: []
   m_Father: {fileID: 353285354947845539}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -90,7 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03d0fa8b6bd6cf44e93961fd9d6a2dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 353285355908525550}
+  stats: {fileID: 6050157124891759648}
   currentTile: {x: -99999, y: -99999, z: 0}
   lastTile: {x: 0, y: 0, z: 0}
   empty: {fileID: 11400000, guid: 3445a9b15b5107545bcc5b866b559579, type: 2}
@@ -99,7 +101,28 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   AIControled: 1
---- !u!1 &353285355908525549
+--- !u!114 &6050157124891759648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 353285355066215419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224633fc11a124e4498f119b64031956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: 5dd9e2ac98eb6b6418fe89cd1db5ca1f, type: 2}
+  hp: 0
+  health: 0
+  attack: 0
+  tempAttack: 0
+  defense: 0
+  speed: 0
+  evade: 0
+  canRun: 0
+--- !u!1 &5287657090540085992
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,43 +130,140 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 353285355908525551}
-  - component: {fileID: 353285355908525550}
+  - component: {fileID: 3056265988980827173}
+  - component: {fileID: 2426061307745226712}
+  - component: {fileID: 3000720954295162002}
   m_Layer: 0
-  m_Name: StatManager
+  m_Name: Horse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &353285355908525551
+--- !u!4 &3056265988980827173
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353285355908525549}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 5287657090540085992}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 353285355066215421}
-  m_RootOrder: 0
+  m_Father: {fileID: 353285354947845539}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &353285355908525550
+--- !u!114 &2426061307745226712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 353285355908525549}
+  m_GameObject: {fileID: 5287657090540085992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d0fa8b6bd6cf44e93961fd9d6a2dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 3000720954295162002}
+  currentTile: {x: -99999, y: -99999, z: 0}
+  lastTile: {x: 0, y: 0, z: 0}
+  empty: {fileID: 11400000, guid: 3445a9b15b5107545bcc5b866b559579, type: 2}
+  inventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  AIControled: 1
+--- !u!114 &3000720954295162002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5287657090540085992}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 224633fc11a124e4498f119b64031956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseStats: {fileID: 11400000, guid: 5dd9e2ac98eb6b6418fe89cd1db5ca1f, type: 2}
+  baseStats: {fileID: 11400000, guid: 9aa3eba5e0f526544b1b042fac6b5f82, type: 2}
+  hp: 0
+  health: 0
+  attack: 0
+  tempAttack: 0
+  defense: 0
+  speed: 0
+  evade: 0
+  canRun: 0
+--- !u!1 &8487618858907527035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3511203737914461266}
+  - component: {fileID: 7612816996698040265}
+  - component: {fileID: 4471831032573321710}
+  m_Layer: 0
+  m_Name: Thorn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3511203737914461266
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487618858907527035}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 353285354947845539}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7612816996698040265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487618858907527035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03d0fa8b6bd6cf44e93961fd9d6a2dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 4471831032573321710}
+  currentTile: {x: -99999, y: -99999, z: 0}
+  lastTile: {x: 0, y: 0, z: 0}
+  empty: {fileID: 11400000, guid: 3445a9b15b5107545bcc5b866b559579, type: 2}
+  inventory:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  AIControled: 1
+--- !u!114 &4471831032573321710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8487618858907527035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224633fc11a124e4498f119b64031956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseStats: {fileID: 11400000, guid: ef3bbb9a39ba56d4a9edcca0064ef530, type: 2}
   hp: 0
   health: 0
   attack: 0
