@@ -2951,7 +2951,13 @@ MonoBehaviour:
   rollPromt: ROLL!
   firstTurn: 1
   decidingTurn: 1
+  notEmpty: 0
+  loop1: 0
+  loop2: 0
+  invOpen: 0
   diceRoll: 1
+  c1temp: {fileID: 0}
+  c2temp: {fileID: 0}
   defEvd: 0
   bs: 0
 --- !u!114 &6154069507706232896
@@ -2968,6 +2974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BattlePanel: {fileID: 6154069507674168165}
   CutInPanel: {fileID: 6154069507550047134}
+  InvPanel: {fileID: 8718262637480956597}
   C1Bust: {fileID: 6154069507665181044}
   C2Bust: {fileID: 6154069508300921382}
   C1Battle: {fileID: 6154069508829771709}
@@ -11803,6 +11810,7 @@ MonoBehaviour:
   slot2: {fileID: 8718262636941656357}
   slot3: {fileID: 8718262637618673762}
   descriptionBox: {fileID: 8718262637288092831}
+  inBattle: 0
 --- !u!1 &8718262637481833287
 GameObject:
   m_ObjectHideFlags: 0
