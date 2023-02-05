@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cfeff42ca20444989eb47ab7b5de62, type: 3}
   m_Name: Thorn
   m_EditorClassIdentifier: 
-  title: 
-  sprite: {fileID: 21300000, guid: 3d3658cbf70229343b8e9dcac3b50def, type: 3}
+  title: Thorn
+  Bustsprite: {fileID: 21300000, guid: 3d3658cbf70229343b8e9dcac3b50def, type: 3}
+  Portsprite: {fileID: 21300000, guid: 3d3658cbf70229343b8e9dcac3b50def, type: 3}
+  Batsprite: {fileID: 21300000, guid: 3d3658cbf70229343b8e9dcac3b50def, type: 3}
   hp: 5
   health: 5
   attack: 2

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Player2
   m_EditorClassIdentifier: 
   title: Player 2
-  sprite: {fileID: 21300000, guid: 3d6b4508b591af84c80fb0bf1ea6be70, type: 3}
+  Bustsprite: {fileID: 21300000, guid: 5b6d01bbbe75e964d84a766de967c5c4, type: 3}
+  Portsprite: {fileID: 21300000, guid: 3d6b4508b591af84c80fb0bf1ea6be70, type: 3}
+  Batsprite: {fileID: 21300000, guid: c1068926cb4129f49b9052320117c5b8, type: 3}
   hp: 3
   health: 3
   attack: 3
