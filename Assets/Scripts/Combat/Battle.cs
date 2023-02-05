@@ -93,6 +93,7 @@ public class Battle : MonoBehaviour
     //This will start the battle and play the animations for the characters in question
     public void BattleStart(Character c1, Character c2)
     {
+        DontDestroy.instance.swapTracks();
         //Grabs a reference to both characters and resets their temporary attack
         c1temp = c1;
         c2temp = c2;
@@ -295,6 +296,8 @@ public class Battle : MonoBehaviour
 
             BUI.battlePan(false);
             BUI.cutinPan(false);
+
+            DontDestroy.instance.swapTracks();
 
             bs = BattleState.OFF;
 
