@@ -16,6 +16,7 @@ public class Inventory : MonoBehaviour
     public GameObject slot2;
     public GameObject slot3;
     public GameObject descriptionBox;
+    public GameObject inventoryName;
 
     public bool inBattle = false;
 
@@ -36,6 +37,7 @@ public class Inventory : MonoBehaviour
         slot1.GetComponent<TextMeshProUGUI>().text = tempC.inventory[0].type;
         slot2.GetComponent<TextMeshProUGUI>().text = tempC.inventory[1].type;
         slot3.GetComponent<TextMeshProUGUI>().text = tempC.inventory[2].type;
+        inventoryName.GetComponent<TextMeshProUGUI>().text = tempC.stats.baseStats.title;
     }
 
     public void pullUpInventory(Character c)
@@ -48,6 +50,7 @@ public class Inventory : MonoBehaviour
         slot1.GetComponent<TextMeshProUGUI>().text = c.inventory[0].type;
         slot2.GetComponent<TextMeshProUGUI>().text = c.inventory[1].type;
         slot3.GetComponent<TextMeshProUGUI>().text = c.inventory[2].type;
+        inventoryName.GetComponent<TextMeshProUGUI>().text = tempC.stats.baseStats.title;
     }
 
     public void setDescription()
