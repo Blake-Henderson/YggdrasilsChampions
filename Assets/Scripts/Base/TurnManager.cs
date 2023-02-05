@@ -119,6 +119,7 @@ public class TurnManager : MonoBehaviour
 
     public void AIDoneFighting()
     {
+        PlayerInfoUI.instance.gameObject.SetActive(true);
         Battle.instance.finishEvent.RemoveListener(AIDoneFighting);
         if (characters[gm.turnCount].stats.health <= 0)
         {
@@ -137,6 +138,7 @@ public class TurnManager : MonoBehaviour
         fightable.RemoveAt(i);
         if (fight == 1)
         {
+            PlayerInfoUI.instance.gameObject.SetActive(false);
             Battle.instance.BattleStart(characters[gm.turnCount], toFight);
             Battle.instance.finishEvent.AddListener(AIDoneFighting);
         } else
