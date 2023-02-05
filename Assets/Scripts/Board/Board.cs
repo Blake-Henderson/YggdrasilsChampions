@@ -11,8 +11,10 @@ public class Board : MonoBehaviour
 
     private Dictionary<TileBase, TileType> baseTypeDict = new Dictionary<TileBase, TileType>();
 
+    public List<Vector3Int> allTiles;
+
     private Plane plane;
-    
+
     void Start()
     {
         plane = new Plane(Vector3.forward, Vector3.zero);
@@ -23,6 +25,21 @@ public class Board : MonoBehaviour
                 if (!baseTypeDict.ContainsKey(ba)) baseTypeDict.Add(ba, ty);
             }
         }
+        BoundsInt bounds = map.cellBounds;
+        for (int x = bounds.min.x; x < bounds.max.x; x++)
+        {
+            for (int y = bounds.min.y; y < bounds.max.y; y++)
+            {
+                Vector3Int pos = new Vector3Int(x, y);
+                TileBase tile = map.GetTile(pos);
+                if (tile != null) allTiles.Add(pos);
+            }
+        }
+    }
+
+    public Vector3Int GetRandomTile()
+    {
+        return allTiles[Random.Range(0, allTiles.Count)];
     }
 
     public bool StepOnTile(Vector3Int pos)
