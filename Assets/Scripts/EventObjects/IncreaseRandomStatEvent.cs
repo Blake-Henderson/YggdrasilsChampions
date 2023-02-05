@@ -20,6 +20,7 @@ public class IncreaseRandomStatEvent : EventObject
                 statName = "Health";
                 statAmount = Random.Range(1, 4);
                 ch.stats.hp += statAmount;
+                ch.stats.health += statAmount;
                 break;
             case 1:
                 statName = "Attack";
