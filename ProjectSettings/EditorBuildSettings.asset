@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: b59aad214b18f2f468a1b3ca83d832aa
   - enabled: 1
-    path: Assets/Scenes/Testing Grounds.unity
+    path: Assets/Scenes/GameplayScenes/Testing Grounds.unity
     guid: bfc85bcc80e2e4749a08a0f2a2f55b1d
   - enabled: 1
-    path: Assets/Scenes/Circular.unity
+    path: Assets/Scenes/GameplayScenes/Circular.unity
     guid: 626f5edfa86f5eb45929c301fd864ead
   - enabled: 1
-    path: Assets/Scenes/Three Paths.unity
+    path: Assets/Scenes/GameplayScenes/Three Paths.unity
     guid: ef1631addc1aed64da8622c96b732a7e
+  - enabled: 1
+    path: Assets/Scenes/GameplayScenes/Squared Away.unity
+    guid: c3a458830d690224fb9ed58f3f84b757
   m_configObjects: {}
