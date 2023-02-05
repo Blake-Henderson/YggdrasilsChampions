@@ -2506,6 +2506,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: MoveSelectionMade
       objectReference: {fileID: 0}
+    - target: {fileID: 8718262637480956584, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1852766874}
     - target: {fileID: 8718262637480956585, guid: 764c6342d893d444e92f4bb08c8ba35d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
