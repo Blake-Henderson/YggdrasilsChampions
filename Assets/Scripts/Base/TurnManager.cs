@@ -30,12 +30,19 @@ public class TurnManager : MonoBehaviour
     {
         instance = this;
         gm = GameManager.instance;
-        foreach (Character c in characters) //place initial character
+        for (int i = 0; i < characters.Count; i++) //place initial character
         {
-            c.lastTile = c.currentTile;
-            c.currentTile = board.map.WorldToCell(c.transform.position);
-            c.transform.position = board.map.CellToWorld(c.currentTile) + board.map.tileAnchor;
-
+            characters[i].lastTile = characters[i].currentTile;
+            characters[i].currentTile = board.map.WorldToCell(characters[i].transform.position);
+            characters[i].transform.position = board.map.CellToWorld(characters[i].currentTile) + board.map.tileAnchor;
+            if(i > gm.playercount)
+            {
+                characters[i].AIControled = true;
+            }
+            else
+            {
+                characters[i].AIControled = false;
+            }
         }
         PromptRoll();
     }
