@@ -19,7 +19,7 @@ public class YggTile : TileType
     {
 
         Battle.instance.finishEvent.RemoveListener(FightComplete);
-        if (Yggdrasil.stats.health <= 0) Debug.Log("timber");
+        if (Yggdrasil.stats.health <= 0) WinText.instance.Win();
         else TurnManager.instance.EndTurn();
     }
 }
