@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
     public GameManager gm;
     public GameObject mainPanel;
-    public GameObject playerSelectPanel;
+    public GameObject playerSelectPanel, levelPanel;
+    public TextMeshProUGUI levelText;
+    int selectedLevel = 0;
+    public string[] levels;
     
     public void quit()
     {
@@ -23,7 +27,23 @@ public class MainMenu : MonoBehaviour
     public void playerSelect(int players)
     {
         gm.playercount = players;
-        SceneManager.LoadScene("BoardTest");
+        playerSelectPanel.SetActive(false);
+        levelPanel.SetActive(true);
+        levelText.text = levels[selectedLevel];
+    }
+
+    public void levelSelect()
+    {
+        SceneManager.LoadScene(levels[selectedLevel]);
+    }
+
+    public void ChangeSelectedLevel(int change)
+    {
+        selectedLevel += change;
+        if (selectedLevel < 0) selectedLevel = levels.Length - 1;
+        else selectedLevel %= levels.Length;
+        levelText.text = levels[selectedLevel];
+
     }
 
     public void back()
