@@ -34,6 +34,7 @@ public class MainMenu : MonoBehaviour
 
     public void levelSelect()
     {
+        GameManager.instance.turnCount = 0;
         SceneManager.LoadScene(levels[selectedLevel]);
     }
 
