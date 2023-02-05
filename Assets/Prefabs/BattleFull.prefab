@@ -180,6 +180,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45eb3988dfe7e744583555d4278d423a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finishEvent:
+    m_PersistentCalls:
+      m_Calls: []
   turnOrderPrompt: ROLL FOR TURN ORDER!
   rollPromt: ROLL!
   firstTurn: 1

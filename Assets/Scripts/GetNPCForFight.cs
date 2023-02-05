@@ -11,6 +11,8 @@ public class GetNPCForFight : MonoBehaviour
     }
     public Character GetCharacter()
     {
-        return transform.GetChild(Random.Range(0, transform.childCount)).GetComponent<Character>();
+        Character temp = transform.GetChild(Random.Range(0, transform.childCount)).GetComponent<Character>();
+        temp.stats.health = temp.stats.hp; 
+        return temp;
     }
 }
