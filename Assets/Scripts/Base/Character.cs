@@ -16,5 +16,7 @@ public class Character : MonoBehaviour
         {
             inventory[i] = empty;
         }
+        stats.raiseStat(Random.Range(0,5), 1);
+        stats.health = stats.hp;
     }
 }
