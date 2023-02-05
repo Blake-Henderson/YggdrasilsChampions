@@ -6,6 +6,8 @@ using UnityEngine;
 public class GiveItemEvent : EventObject
 {
     public Item item;
+    public GiveItemPopup prefab;
+    public GiveItemPopup tmp;
 
     public override bool Effect()
     {
@@ -19,13 +21,21 @@ public class GiveItemEvent : EventObject
                 break;
             }
         }
-        if (worked) { } //display ui showing it worked
-        else { } //display ui showing inventory full
-        return false;
+        tmp = Instantiate(prefab);
+        if (worked) {
+            tmp.text.text = TurnManager.instance.characters[TurnManager.instance.gm.turnCount].name + " got a " + item.name;
+        } 
+        else
+        {
+            tmp.text.text = TurnManager.instance.characters[TurnManager.instance.gm.turnCount].name + " got a " + item.name + ", but did not have inventory space to keep it!";
+        }
+        tmp.button.onClick.AddListener(End);
+        return true;
     }
 
     public override void End()
     {
-        throw new System.NotImplementedException();
+        Destroy(tmp.gameObject);
+        TurnManager.instance.EndTurn();
     }
 }

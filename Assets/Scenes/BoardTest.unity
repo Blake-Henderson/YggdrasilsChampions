@@ -1981,7 +1981,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  AIControled: 0
+  AIControled: 1
 --- !u!4 &1409124349
 Transform:
   m_ObjectHideFlags: 0
@@ -2317,7 +2317,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  AIControled: 0
+  AIControled: 1
 --- !u!1001 &1923327426
 PrefabInstance:
   m_ObjectHideFlags: 0
